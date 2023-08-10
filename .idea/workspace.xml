@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cad3848-1525-4d25-a87c-214202721c5d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs-site/docs/02_getting_started.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs-site/docs/03_components/01_core_abstractions.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs-site/docs/03_components/02_embeddings_space.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs-site/docs/01_introduction.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs-site/docs/01_introduction.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs-site/sidebars.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs-site/sidebars.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +40,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TODO_SCOPE": "All Places",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "openjdk-20",
@@ -42,6 +50,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -61,7 +70,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1691507959181</updated>
-      <workItem from="1691507960273" duration="6615000" />
+      <workItem from="1691507960273" duration="17280000" />
+      <workItem from="1691687224885" duration="6374000" />
     </task>
     <servers />
   </component>
