@@ -20,6 +20,26 @@ The Embeddings Space Component provides straightforward interfaces to create and
 
 Text generation is the reason why LLMs became mainstream. This component provides text generation features that enable use cases like text completion, summarization, translation or explanations. Access the Text Generation Component documentation page for more details.
 
+## Getting started
+
+### Installing eLLMental
+
+eLLMental provides composable abstractions for common patterns used in AI applications. For instance, to build a semantic search service with a REST API, using the OpenAI embeddings model and Pinecone as the database, this is what you have to do:
+
+The first thing you want to do is importing the eLLMental dependencies in your `build.gradle` file:
+
+```gradle
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+dependencies {
+    implementation 'com.github.theam:ellmental:main'
+}
+```
+
 ## eLLMental Principles
 
 These are the design principles behind eLLMental:
