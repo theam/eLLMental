@@ -1,0 +1,8 @@
+rootProject.name = "eLLMental"
+
+include(
+        "core",
+        "modules:embeddingsmodel",
+        "modules:examplemodule",
+        "examples:simplejava"
+)
