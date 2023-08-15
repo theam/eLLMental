@@ -1,4 +1,4 @@
-package com.theagilemonkeys.ellmental.embeddingsmodel;
+package com.theagilemonkeys.ellmental.embeddingsgeneration;
 
 
 public abstract class EmbeddingsGenerationModel {
