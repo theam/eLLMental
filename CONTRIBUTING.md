@@ -30,21 +30,16 @@ individual(s).
 
 ## Setting Up a Development Environment
 
-Here's how you can prep you development environment for contributing to this gradle project written in Kotlin.
+Here's how you can prep your development environment for contributing to this Gradle project written in Java.
 
 ### Prerequisites
 
-1. Ensure you have Java Development Kit (JDK) installed on your local machine. This is needed to run the Kotlin
+1. Ensure you have Java Development Kit (JDK) installed on your local machine. This is needed to run the Java
    compiler. You can download the JDK from
    the [official Oracle website](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html) or install
    it with a package manager of your choice.
 
-2. Install Kotlin command line compiler. Refer to
-   Kotlin's [official guide](https://kotlinlang.org/docs/command-line.html) for installation instructions on your
-   Operating System.
-
-3. Have Gradle installed. You can find the necessary instructions to install Gradle from
-   their [official installation guide](https://gradle.org/install/).
+2. Install Gradle on your machine. The detailed process of installation on different platforms can be found at the [official installation guide](https://gradle.org/install/).
 
 ### Getting the Source Code
 
@@ -126,7 +121,7 @@ Enhancement suggestions are tracked as GitHub issues. Make sure you provide the 
 
 ## Improving documentation
 
-[eLLMental documentation](https://kotlin.ellmental.com) is treated as a live document that continues improving on a
+The [eLLMental documentation](https://docs.ellmental.com) is treated as a live document that continues improving on a
 daily basis. If you find something that is missing or can be improved, please contribute, it will be of great help for
 other developers.
 To contribute you can use the button "Edit in GitHub" at the top of each chapter.

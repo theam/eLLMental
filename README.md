@@ -5,8 +5,7 @@
 
 eLLMental is the ultimate library of components for building LLM-driven projects in the JVM.
 
-[//]: # (TODO: Fix this link!)
-Wanna try? Go straight to the [Getting Started Guide](/docs/02_getting_started.md), or keep reading to know more about eLLMental.
+Wanna try? Go straight to the [Getting Started Guide](https://docs.ellmental.com/getting-started), or keep reading to know more about eLLMental.
 
 ## What can you do with eLLMental?
 
