@@ -20,7 +20,7 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 // EXTERNAL MODULE: ./.docusaurus/routesChunkNames.json
 var routesChunkNames = __webpack_require__(6887);
 ;// CONCATENATED MODULE: ./.docusaurus/registry.js
-/* harmony default export */ const registry = ({'17896441':[()=>Promise.all(/* import() | 17896441 */[__webpack_require__.e(532), __webpack_require__.e(918)]).then(__webpack_require__.bind(__webpack_require__, 2019)),'@theme/DocItem',/*require.resolve*/(2019)],'1be78505':[()=>Promise.all(/* import() | 1be78505 */[__webpack_require__.e(532), __webpack_require__.e(514)]).then(__webpack_require__.bind(__webpack_require__, 1197)),'@theme/DocPage',/*require.resolve*/(1197)],'483c79d4':[()=>__webpack_require__.e(/* import() | 483c79d4 */ 164).then(__webpack_require__.bind(__webpack_require__, 9666)),'@site/docs/03_components/01_core_abstractions.md',/*require.resolve*/(9666)],'5b471282':[()=>__webpack_require__.e(/* import() | 5b471282 */ 956).then(__webpack_require__.bind(__webpack_require__, 8548)),'@site/docs/04_community/index.md',/*require.resolve*/(8548)],'6866e3af':[()=>__webpack_require__.e(/* import() | 6866e3af */ 888).then(__webpack_require__.bind(__webpack_require__, 9966)),'@site/docs/02_getting_started.md',/*require.resolve*/(9966)],'73f7f3c9':[()=>__webpack_require__.e(/* import() | 73f7f3c9 */ 39).then(__webpack_require__.t.bind(__webpack_require__, 3769, 19)),'/home/runner/work/eLLMental3/eLLMental3/docs-site/.docusaurus/docusaurus-plugin-content-docs/default/plugin-route-context-module-100.json',/*require.resolve*/(3769)],'935f2afb':[()=>__webpack_require__.e(/* import() | 935f2afb */ 53).then(__webpack_require__.t.bind(__webpack_require__, 1109, 19)),'~docs/default/version-current-metadata-prop-751.json',/*require.resolve*/(1109)],'972024fb':[()=>__webpack_require__.e(/* import() | 972024fb */ 178).then(__webpack_require__.bind(__webpack_require__, 6222)),'@site/docs/04_community/code_of_conduct.mdx',/*require.resolve*/(6222)],'c01ae077':[()=>__webpack_require__.e(/* import() | c01ae077 */ 941).then(__webpack_require__.bind(__webpack_require__, 7050)),'@site/docs/01_introduction.md',/*require.resolve*/(7050)],'db385b99':[()=>__webpack_require__.e(/* import() | db385b99 */ 728).then(__webpack_require__.bind(__webpack_require__, 3391)),'@site/docs/04_community/contributing.mdx',/*require.resolve*/(3391)],'e9c83615':[()=>__webpack_require__.e(/* import() | e9c83615 */ 805).then(__webpack_require__.bind(__webpack_require__, 3913)),'@site/docs/03_components/02_embeddings_space.md',/*require.resolve*/(3913)]});
+/* harmony default export */ const registry = ({'17896441':[()=>Promise.all(/* import() | 17896441 */[__webpack_require__.e(532), __webpack_require__.e(918)]).then(__webpack_require__.bind(__webpack_require__, 2019)),'@theme/DocItem',/*require.resolve*/(2019)],'1be78505':[()=>Promise.all(/* import() | 1be78505 */[__webpack_require__.e(532), __webpack_require__.e(514)]).then(__webpack_require__.bind(__webpack_require__, 1197)),'@theme/DocPage',/*require.resolve*/(1197)],'2981f78a':[()=>__webpack_require__.e(/* import() | 2981f78a */ 512).then(__webpack_require__.t.bind(__webpack_require__, 3769, 19)),'/home/runner/work/eLLMental/eLLMental/docs-site/.docusaurus/docusaurus-plugin-content-docs/default/plugin-route-context-module-100.json',/*require.resolve*/(3769)],'483c79d4':[()=>__webpack_require__.e(/* import() | 483c79d4 */ 164).then(__webpack_require__.bind(__webpack_require__, 9666)),'@site/docs/03_components/01_core_abstractions.md',/*require.resolve*/(9666)],'5b471282':[()=>__webpack_require__.e(/* import() | 5b471282 */ 956).then(__webpack_require__.bind(__webpack_require__, 8548)),'@site/docs/04_community/index.md',/*require.resolve*/(8548)],'6866e3af':[()=>__webpack_require__.e(/* import() | 6866e3af */ 888).then(__webpack_require__.bind(__webpack_require__, 9966)),'@site/docs/02_getting_started.md',/*require.resolve*/(9966)],'935f2afb':[()=>__webpack_require__.e(/* import() | 935f2afb */ 53).then(__webpack_require__.t.bind(__webpack_require__, 1109, 19)),'~docs/default/version-current-metadata-prop-751.json',/*require.resolve*/(1109)],'972024fb':[()=>__webpack_require__.e(/* import() | 972024fb */ 178).then(__webpack_require__.bind(__webpack_require__, 6222)),'@site/docs/04_community/code_of_conduct.mdx',/*require.resolve*/(6222)],'c01ae077':[()=>__webpack_require__.e(/* import() | c01ae077 */ 941).then(__webpack_require__.bind(__webpack_require__, 7050)),'@site/docs/01_introduction.md',/*require.resolve*/(7050)],'db385b99':[()=>__webpack_require__.e(/* import() | db385b99 */ 728).then(__webpack_require__.bind(__webpack_require__, 3391)),'@site/docs/04_community/contributing.mdx',/*require.resolve*/(3391)],'e9c83615':[()=>__webpack_require__.e(/* import() | e9c83615 */ 805).then(__webpack_require__.bind(__webpack_require__, 3913)),'@site/docs/03_components/02_embeddings_space.md',/*require.resolve*/(3913)]});
 ;// CONCATENATED MODULE: ./node_modules/@docusaurus/core/lib/client/theme-fallback/Loading/index.js
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -70,7 +70,7 @@ if(typeof chunk==='object'||typeof chunk==='function'){Object.keys(loadedModule)
 let val=loadedModules;const keyPaths=keyPath.split('.');keyPaths.slice(0,-1).forEach(k=>{val=val[k];});val[keyPaths[keyPaths.length-1]]=chunk;});/* eslint-disable no-underscore-dangle */const Component=loadedModules.__comp;delete loadedModules.__comp;const routeContext=loadedModules.__context;delete loadedModules.__context;/* eslint-enable no-underscore-dangle */ // Is there any way to put this RouteContextProvider upper in the tree?
 return/*#__PURE__*/react.createElement(client_routeContext/* RouteContextProvider */.z,{value:routeContext},/*#__PURE__*/react.createElement(Component,(0,esm_extends/* default */.Z)({},loadedModules,props)));}});}
 ;// CONCATENATED MODULE: ./.docusaurus/routes.js
-/* harmony default export */ const routes = ([{path:'/',component:ComponentCreator('/','fce'),routes:[{path:'/',component:ComponentCreator('/','3bb'),exact:true,sidebar:"docs"},{path:'/community/',component:ComponentCreator('/community/','406'),exact:true,sidebar:"docs"},{path:'/community/code_of_conduct',component:ComponentCreator('/community/code_of_conduct','7bd'),exact:true,sidebar:"docs"},{path:'/community/contributing',component:ComponentCreator('/community/contributing','2b2'),exact:true,sidebar:"docs"},{path:'/components/core_abstractions',component:ComponentCreator('/components/core_abstractions','44d'),exact:true,sidebar:"docs"},{path:'/components/embeddings_space',component:ComponentCreator('/components/embeddings_space','9cb'),exact:true,sidebar:"docs"},{path:'/getting-started',component:ComponentCreator('/getting-started','79f'),exact:true,sidebar:"docs"}]},{path:'*',component:ComponentCreator('*')}]);
+/* harmony default export */ const routes = ([{path:'/',component:ComponentCreator('/','130'),routes:[{path:'/',component:ComponentCreator('/','3bb'),exact:true,sidebar:"docs"},{path:'/community/',component:ComponentCreator('/community/','406'),exact:true,sidebar:"docs"},{path:'/community/code_of_conduct',component:ComponentCreator('/community/code_of_conduct','7bd'),exact:true,sidebar:"docs"},{path:'/community/contributing',component:ComponentCreator('/community/contributing','2b2'),exact:true,sidebar:"docs"},{path:'/components/core_abstractions',component:ComponentCreator('/components/core_abstractions','44d'),exact:true,sidebar:"docs"},{path:'/components/embeddings_space',component:ComponentCreator('/components/embeddings_space','9cb'),exact:true,sidebar:"docs"},{path:'/getting-started',component:ComponentCreator('/getting-started','79f'),exact:true,sidebar:"docs"}]},{path:'*',component:ComponentCreator('*')}]);
 
 /***/ }),
 
@@ -1493,7 +1493,7 @@ title,description}=props;(0,useKeyboardNavigation/* useKeyboardNavigation */.t)(
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Z: () => (/* binding */ Logo)
 /* harmony export */ });
-/* harmony import */ var _home_runner_work_eLLMental3_eLLMental3_docs_site_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7462);
+/* harmony import */ var _home_runner_work_eLLMental_eLLMental_docs_site_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7462);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7294);
 /* harmony import */ var _docusaurus_Link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9960);
 /* harmony import */ var _docusaurus_useBaseUrl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4996);
@@ -1511,7 +1511,7 @@ return imageClassName?/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElem
 // an empty string to mark the logo as decorative.
 const fallbackAlt=navbarTitle?'':title;// Use logo alt text if provided (including empty string),
 // and provide a sensible fallback otherwise.
-const alt=logo?.alt??fallbackAlt;return/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_docusaurus_Link__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z,(0,_home_runner_work_eLLMental3_eLLMental3_docs_site_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)({to:logoLink},propsRest,logo?.target&&{target:logo.target}),logo&&/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(LogoThemedImage,{logo:logo,alt:alt,imageClassName:imageClassName}),navbarTitle!=null&&/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b",{className:titleClassName},navbarTitle));}
+const alt=logo?.alt??fallbackAlt;return/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_docusaurus_Link__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z,(0,_home_runner_work_eLLMental_eLLMental_docs_site_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)({to:logoLink},propsRest,logo?.target&&{target:logo.target}),logo&&/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(LogoThemedImage,{logo:logo,alt:alt,imageClassName:imageClassName}),navbarTitle!=null&&/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b",{className:titleClassName},navbarTitle));}
 
 /***/ }),
 
@@ -1583,7 +1583,7 @@ var contexts_colorMode = __webpack_require__(2949);
 /* harmony export */   u: () => (/* binding */ useCollapsible),
 /* harmony export */   z: () => (/* binding */ Collapsible)
 /* harmony export */ });
-/* harmony import */ var _home_runner_work_eLLMental3_eLLMental3_docs_site_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7462);
+/* harmony import */ var _home_runner_work_eLLMental_eLLMental_docs_site_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7462);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7294);
 /* harmony import */ var _docusaurus_ExecutionEnvironment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(412);
 /* harmony import */ var _utils_accessibilityUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1442);
@@ -1611,7 +1611,7 @@ else{el.style.display='block';requestAnimationFrame(()=>{applyTransitionStyles()
 // "CollapsibleElementType" being a huge union
 ,{ref:collapsibleRef// Refs are contravariant, which is not expressible in TS
 ,style:disableSSRStyle?undefined:getSSRStyle(collapsed),onTransitionEnd:e=>{if(e.propertyName!=='height'){return;}applyCollapsedStyle(collapsibleRef.current,collapsed);onCollapseTransitionEnd?.(collapsed);},className:className},children);}function CollapsibleLazy(_ref4){let{collapsed,...props}=_ref4;const[mounted,setMounted]=(0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(!collapsed);// Updated in effect so that first expansion transition can work
-const[lazyCollapsed,setLazyCollapsed]=(0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(collapsed);(0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(()=>{if(!collapsed){setMounted(true);}},[collapsed]);(0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(()=>{if(mounted){setLazyCollapsed(collapsed);}},[mounted,collapsed]);return mounted?/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(CollapsibleBase,(0,_home_runner_work_eLLMental3_eLLMental3_docs_site_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)({},props,{collapsed:lazyCollapsed})):null;}/**
+const[lazyCollapsed,setLazyCollapsed]=(0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(collapsed);(0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(()=>{if(!collapsed){setMounted(true);}},[collapsed]);(0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(()=>{if(mounted){setLazyCollapsed(collapsed);}},[mounted,collapsed]);return mounted?/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(CollapsibleBase,(0,_home_runner_work_eLLMental_eLLMental_docs_site_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)({},props,{collapsed:lazyCollapsed})):null;}/**
  * A headless component providing smooth and uniform collapsing behavior. The
  * component will be invisible (zero height) when collapsed. Doesn't provide
  * interactivity by itself: collapse state is toggled through props.
@@ -11509,19 +11509,19 @@ if (true) {
       {
         "docs": {
           "routeBasePath": "/",
-          "sidebarPath": "/home/runner/work/eLLMental3/eLLMental3/docs-site/sidebars.js",
+          "sidebarPath": "/home/runner/work/eLLMental/eLLMental/docs-site/sidebars.js",
           "showLastUpdateTime": true,
           "showLastUpdateAuthor": true
         },
         "blog": false,
         "theme": {
-          "customCss": "/home/runner/work/eLLMental3/eLLMental3/docs-site/src/css/custom.css"
+          "customCss": "/home/runner/work/eLLMental/eLLMental/docs-site/src/css/custom.css"
         }
       }
     ]
   ],
   "plugins": [
-    "/home/runner/work/eLLMental3/eLLMental3/docs-site/node_modules/docusaurus-plugin-fathom/src/index.js"
+    "/home/runner/work/eLLMental/eLLMental/docs-site/node_modules/docusaurus-plugin-fathom/src/index.js"
   ],
   "themeConfig": {
     "image": "img/logoellmental.png",
@@ -11909,7 +11909,7 @@ module.exports = {};
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"/-fce":{"__comp":"1be78505","__context":{"plugin":"73f7f3c9"},"versionMetadata":"935f2afb"},"/-3bb":{"__comp":"17896441","content":"c01ae077"},"/community/-406":{"__comp":"17896441","content":"5b471282"},"/community/code_of_conduct-7bd":{"__comp":"17896441","content":"972024fb"},"/community/contributing-2b2":{"__comp":"17896441","content":"db385b99"},"/components/core_abstractions-44d":{"__comp":"17896441","content":"483c79d4"},"/components/embeddings_space-9cb":{"__comp":"17896441","content":"e9c83615"},"/getting-started-79f":{"__comp":"17896441","content":"6866e3af"}}');
+module.exports = JSON.parse('{"/-130":{"__comp":"1be78505","__context":{"plugin":"2981f78a"},"versionMetadata":"935f2afb"},"/-3bb":{"__comp":"17896441","content":"c01ae077"},"/community/-406":{"__comp":"17896441","content":"5b471282"},"/community/code_of_conduct-7bd":{"__comp":"17896441","content":"972024fb"},"/community/contributing-2b2":{"__comp":"17896441","content":"db385b99"},"/components/core_abstractions-44d":{"__comp":"17896441","content":"483c79d4"},"/components/embeddings_space-9cb":{"__comp":"17896441","content":"e9c83615"},"/getting-started-79f":{"__comp":"17896441","content":"6866e3af"}}');
 
 /***/ })
 
