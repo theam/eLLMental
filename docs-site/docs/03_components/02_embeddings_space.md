@@ -188,7 +188,7 @@ We can use the relationship vector to find the location of the words that would 
 // This will create an estimated embedding of the word "Cow"
 Embedding likelyACowEmbedding = embeddingsSpace.translateEmbedding("Bull", relationshipVector);
 
-// We use it as any other embedding to find stored texts that are similaar to "Cow"
+// We use it as any other embedding to find stored texts that are similar to "Cow"
 List<Embedding> similarToCowEmbeddings = embeddingsSpace.mostSimilarEmbeddings(likelyACowEmbedding, 5);
 ```
 
