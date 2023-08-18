@@ -91,7 +91,7 @@ public class MainApp {
         embeddingsSpace.save("Hi!");
         embeddingsSpace.save("Cats are cute");
         embeddingsSpace.save("Dogs are loyal");
-        // You can provide Metadata to the `add` call too
+        // You can provide Metadata to the `save` call too
         Map<String, String> metadata = new HashMap<>();
         metadata.put("key", "value");
         embeddingsSpace.save("Hey there!", metadata)
