@@ -5,11 +5,13 @@ slug: /getting-started
 
 eLLMental is a library designed for building AI-powered applications written in Java, and it offers production-ready components that can be used right away in your current JVM projects. In this guide, we will showcase how to use the `EmbeddingsSpaceComponent` to find relevant text based on a query.
 
-## Step 1: Add the eLLMental dependencies using [JitPack](https://jitpack.io)
+## Step 1: Add the eLLMental dependencies
+
+In eLLMental, we make use of [JitPack](https://jitpack.io) to import eLLMental into our projects. Below there are some examples of how you can use it.
+
+### Gradle
 
 Incorporate the eLLMental dependencies into your `build.gradle` file.
-
-Here's a reference for you:
 
 ```java
 allprojects {
@@ -23,6 +25,27 @@ dependencies {
 }
 ```
 
+### Maven
+
+You can also add the eLLMental dependencies into your `pom.xml` file.
+
+```maven
+<repositories>
+    <repository>
+	    <id>jitpack.io</id>
+		<url>https://jitpack.io</url>
+	</repository>
+</repositories>
+
+<dependency>
+	<groupId>com.github.theam</groupId>
+    <artifactId>eLLMental</artifactId>
+    <version>main</version>
+</dependency>
+```
+
+
+
 ## Step 2: Initializing the EmbeddingsSpaceComponent
 
 Before initializing the `EmbeddingsSpaceComponent`, set up the `OpenAIEmbeddingsModel` and `PineconeVectorStore`.
@@ -34,24 +57,11 @@ import com.theagilemonkeys.ellmental.embeddingsmodel.openai.OpenAIEmbeddingsMode
 import com.theagilemonkeys.ellmental.vectorstore.pinecone.PineconeVectorStore;
 
 public OpenAIEmbeddingsModel embeddingsModel() {
-    String openaiToken = System.getenv("OPEN_AI_API_KEY");
-    if (openaiToken == null) {
-        throw new RuntimeException("OPEN_AI_API_KEY environment variable is not set");
-    }
-    return new OpenAIEmbeddingsModel(openAIToken);
+    return new OpenAIEmbeddingsModel("OPEN_AI_API_KEY");
 }
 
 public PineconeVectorStore vectorStore() {
-    String pineconeToken = System.getenv("PINECONE_API_KEY");
-    if (pineconeToken == null) {
-        throw new RuntimeException("PINECONE_API_KEY environment variable is not set");
-    }
-    String pineconeUrl = System.getenv("PINECONE_URL");
-    if (pineconeUrl == null) {
-        throw new RuntimeException("PINECONE_URL environment variable is not set");
-    }
-    String pineconeNamespace = System.getenv("PINECONE_NAMESPACE");  // optional parameter
-    return new PineconeVectorStore(pineconeToken, pineconeUrl, pineconeNamespace);
+    return new PineconeVectorStore("PINECONE_API_KEY", "PINECONE_URL", "PINECONE_NAMESPACE");
 }
 ```
 
@@ -75,12 +85,17 @@ public class MainApp {
     public static void main(String[] args) {
         EmbeddingsSpaceComponent embeddingsSpace = initializeEmbeddingsSpace();
         
-        // Add some embedding samples to the embeddings space
-        embeddingsSpace.add("Hello, eLLMental!", null);
-        embeddingsSpace.add("Hello, world!", null);
-        embeddingsSpace.add("Hi!", null);
-        embeddingsSpace.add("Cats are cute", null);
-        embeddingsSpace.add("Dogs are loyal", null);
+        // Add some embedding samples to the embeddings space.
+        embeddingsSpace.save("Hello, eLLMental!");
+        embeddingsSpace.save("Hello, world!");
+        embeddingsSpace.save("Hi!");
+        embeddingsSpace.save("Cats are cute");
+        embeddingsSpace.save("Dogs are loyal");
+        // You can provide Metadata to the `save` call too
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("key", "value");
+        embeddingsSpace.save("Hey there!", metadata)
+
         
         // Search similar embeddings
         List<Embedding> results = embeddingsSpace.mostSimilarEmbeddings("Greetings!", 3);
@@ -104,6 +119,79 @@ Hi!
 
 > Notice that the result outputs three entries because we specified the limit to be 3 in the `mostSimilarEmbeddings` function, but you can change this value to any number you want. Take into account that in the embeddings space, the database will calculate distances with every other embedding, so higher limits may return results that are not strictly similar to the query. Take into account that the list is ranked by similarity, so the first result is the most similar to the query and the latest is the least similar.
 
+## eLLMental :heart: Springboot
+
+If you prefer to use eLLMental from Springboot, you can always use the `application.properties` file to import your environment variables and just modify a little bit the code as seen below:
+
+### Importing env variables from application.properties
+
+```
+# application.properties
+
+OPEN_AI_API_KEY=<your_openai_key>
+PINECONE_API_KEY=<your_pinecone_key>
+PINECONE_URL=<your_pinecone_url>
+PINECONE_NAMESPACE=<your_pinecone_namespace>
+```
+
+### Configuring EmbeddingsSpaceComponent
+
+```java
+import com.theagilemonkeys.ellmental.EmbeddingsSpaceComponent;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class EllmentalConfiguration{
+
+    @Value("${OPEN_AI_API_KEY}")
+    private String openAiApiKey;
+
+    @Value("${PINECONE_API_KEY}")
+    private String pineconeApiKey;
+
+    @Value("${PINECONE_URL}")
+    private String pineconeUrl;
+
+    @Value("${PINECONE_NAMESPACE}")
+    private String pineconeNamespace;
+
+    private OpenAIEmbeddingsModel embeddingsModel() {
+        return new OpenAIEmbeddingsModel(openAiApiKey);
+    }
+
+    private PineconeVectorStore vectorStore() {
+        return new PineconeVectorStore(pineconeApiKey, pineconeUrl, pineconeNamespace);
+    }
+
+    // Usable public Bean
+    @Bean
+    public EmbeddingsSpaceComponent embeddingsSpaceComponent() {
+        return new EmbeddingsSpaceComponent(embeddingsModel(), vectorStore());
+    }
+}
+```
+
+### Autowiring EmbeddingsSpaceComponent
+
+```java
+import com.theagilemonkeys.ellmental.EmbeddingsSpaceComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class SomeServiceClass {
+    private final EmbeddingsSpaceComponent embeddingsSpaceComponent;
+
+    @Autowired
+    public SomeServiceClass(EmbeddingsSpaceComponent embeddingsSpaceComponent){
+        this.embeddingsSpaceComponent = embeddingsSpaceComponent;
+    }
+
+    // ...Here you can use embeddingsSpaceComponent
+}
+```
+
+
 ## Next steps
 
-Now that you've learned the basics, you can inlcude eLLMental in your own projects and start experimenting. Try to generate embeddings for a larger corpus of texts like HTML files extracted from a web scraper process, a series of blog posts from your database or a collection of tweets from your Twitter account
+Now that you've learned the basics, you can include eLLMental in your own projects and start experimenting. Try to generate embeddings for a larger corpus of texts like HTML files extracted from a web scraper process, a series of blog posts from your database or a collection of tweets from your Twitter account

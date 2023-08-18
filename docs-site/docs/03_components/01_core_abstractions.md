@@ -1,6 +1,6 @@
 # Core Abstractions
 
-eLLMental uses different 3rd party components and APIs and provides a unified interface. To ensure extensibility and avoid tight coupling with any specific API, the library provides a series of abstract classes that define the expected interface for these components work with eLLMental. To use eLLMental, you can provide your own implementation or use one of the built-in concrete implementations.  
+eLLMental uses different 3rd party components and APIs and provides a unified interface. To ensure extensibility and avoid tight coupling with any specific API, the library provides a series of abstract classes that define the expected interface for these components to work with eLLMental. To use eLLMental, you can provide your own implementation or use one of the built-in concrete implementations.  
 
 ## `EmbeddingsGenerationModel`
 
@@ -41,7 +41,7 @@ eLLMental provides a concrete implementation for Pinecone, which requires defini
 ```java
 EmbeddingsStore pineconeStore = new PineconeEmbeddingsStore("YOUR_PINECONE_URL", "YOUR_PINECONE_API_KEY", "YOUR_PINECONE_SPACE");
 
-// You can insert or perform simularity searches using this object
+// You can insert or perform similarity searches using this object. Metadata is optional.
 pineconeStore.store(someEmbedding, someMetadata);
 List<Embedding> similarEmbeddings = pineconeStore.similaritySearch(referenceEmbedding, 5);
 ```

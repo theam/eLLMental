@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The `EmbeddingsSpaceComponent` represents an embeddings space, facilitating the management and operations within it. Think of embeddings as a numeric representation of the meaning behind text. Similar to how coordinates help pinpoint locations on Earth, in the embeddings space, semantically similar concepts cluster closer together. Before diving in, make sure to follow the [Getting Started Guide](../02_getting_started.md) to install the library in your project. It'd also be advisable to familiarize yourself with the [core abstractions](01_core_abstractions.md).
+The `EmbeddingsSpaceComponent` represents an embeddings space, facilitating the management and operations within it. Think of embeddings as a numeric representation of the meaning behind the text. Similar to how coordinates help pinpoint locations on Earth, in the embeddings space, semantically similar concepts cluster closer together. Before diving in, make sure to follow the [Getting Started Guide](../02_getting_started.md) to install the library in your project. It'd also be advisable to familiarize yourself with the [core abstractions](01_core_abstractions.md).
 
 ## Overview
 
@@ -60,13 +60,13 @@ additionalMetadata.put("key", "value");
 Embedding embedding = embeddingsSpace.generate(sampleText, additionalMetadata);
 ```
 
-## `add`
+## `save`
 
 Generates and persists an embedding for a given text.
 
 - **Parameters**:
     - `text`: Text to be embedded.
-    - `additionalMetadata`: Additional metadata.
+    - `additionalMetadata`: (Optional) Additional metadata.
 - **Returns**: The generated embedding.
 
 ```java
@@ -74,7 +74,10 @@ Map<String, String> additionalMetadata = new HashMap<>();
 additionalMetadata.put("key", "value");
 
 String sampleText = "Hello, eLLMental!";
-        Embedding embedding = embeddingsSpace.add(sampleText, additionalMetadata);
+Embedding embedding = embeddingsSpace.save(sampleText, additionalMetadata);
+
+// Or just
+Embedding embedding = embeddingSpace.save(sampleText);
 ```
 
 ## `mostSimilarEmbeddings`
@@ -89,8 +92,8 @@ With a reference text:
 
 ```java
 // First we add a few embeddings to the space
-embeddingsSpace.add("Hello, eLLMental!");
-embeddingsSpace.add("Hello, world!");
+embeddingsSpace.save("Hello, eLLMental!");
+embeddingsSpace.save("Hello, world!");
 
 List<Embedding> closestNeighbors = embeddingsSpace.mostSimilarEmbeddings("Greetings!", 3);
 // closestNeighbors will contain the embeddings for "Hello, eLLMental!" and "Hello, world!"
