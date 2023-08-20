@@ -3,7 +3,6 @@ rootProject.name = "eLLMental"
 include(
         "core",
         "modules:embeddingsgeneration",
-        "modules:examplemodule",
         "modules:embeddingsstore",
         "examples:simplejava"
 )
