@@ -64,7 +64,6 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
         }
     }
 
-    // TODO: using store for the upsert. Check if this is the correct path.
     public void store(Embedding embedding, Map<String,String> metadata) {
         UpsertVectorSchema schema = new UpsertVectorSchema(embedding, metadata);
         String requestBodyJson = new Gson().toJson(schema);

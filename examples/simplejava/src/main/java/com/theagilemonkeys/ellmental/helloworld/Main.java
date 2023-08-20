@@ -13,12 +13,12 @@ public class Main {
         // Step 1: generate embeddings from input string
         OpenAIEmbeddingsModel openAI = new OpenAIEmbeddingsModel();
         Embedding embedding =  openAI.generateEmbedding("Test");
-        Map<String, String> metadata = new HashMap<>();
-        metadata.put("key1", "value1");
-        metadata.put("key2", "value2");
 
         // Step 2: save the generated embeddings to a store (Pinecone in this case)
         EmbeddingsStore embeddingStore = new PineconeEmbeddingsStore();
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("key1", "value1");
+        metadata.put("key2", "value2");
         embeddingStore.store(embedding, metadata);
 
         // Step 3: search for the embedding in the store

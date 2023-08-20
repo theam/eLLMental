@@ -3,12 +3,11 @@ plugins {
     id 'application'
 }
 
-group = 'com.theagilemonkeys.ellmental.helloworld'
+group = 'com.theagilemonkeys.ellmental'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-
 }
 
 application {
@@ -16,7 +15,6 @@ application {
 }
 
 dependencies {
-    implementation project(':modules:examplemodule')
     implementation project(':modules:embeddingsgeneration')
     implementation project(':modules:embeddingsstore')
     implementation project(':core')
