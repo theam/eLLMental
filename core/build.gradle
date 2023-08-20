@@ -3,7 +3,7 @@ plugins {
 }
 
 
-group = "com.theagilemonkeys.ellmental.core"
+group = "com.theagilemonkeys.ellmental"
 version = '1.0-SNAPSHOT'
 
 
