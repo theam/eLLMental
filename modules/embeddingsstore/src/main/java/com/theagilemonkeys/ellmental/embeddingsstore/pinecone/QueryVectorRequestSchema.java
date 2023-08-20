@@ -23,7 +23,4 @@ public class QueryVectorRequestSchema {
     public Boolean includeMetadata;
     public List<Double> vector;
     public String namespace;
-
-
-
 }

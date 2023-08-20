@@ -10,7 +10,7 @@ public class QueryVectorResponseSchema {
 
 class Match {
     String id;
-    Integer score;
+    Double score;
     List<Double> values;
     Map<String,String> metadata;
 }
