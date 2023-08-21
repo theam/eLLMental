@@ -43,3 +43,5 @@ bin/
 .direnv
 .idea/aws.xml
 .idea/inspectionProfiles
+modules/embeddingsgeneration/.env
+modules/embeddingsstore/.env
