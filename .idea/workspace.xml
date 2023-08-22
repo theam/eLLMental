@@ -7,6 +7,8 @@
     <list default="true" id="9cad3848-1525-4d25-a87c-214202721c5d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/core/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/ActionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/ActionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/theagilemonkeys/ellmental/core/ActionManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/theagilemonkeys/ellmental/core/ActionManagerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +83,31 @@
       <recent name="com.theagilemonkeys.ellmental.core" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.ActionManagerTest.testExample">
+    <configuration name="ActionManagerTest.testExample" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":core:test" />
+            <option value="--tests" />
+            <option value="&quot;com.theagilemonkeys.ellmental.core.ActionManagerTest.testExample&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>true</ForceTestExec>
+      <method v="2" />
+    </configuration>
     <configuration name="eLLMental [build]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -116,6 +142,11 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.ActionManagerTest.testExample" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -128,7 +159,7 @@
       <workItem from="1691507960273" duration="17280000" />
       <workItem from="1691687224885" duration="6374000" />
       <workItem from="1692634591758" duration="494000" />
-      <workItem from="1692718708139" duration="1779000" />
+      <workItem from="1692718708139" duration="3485000" />
     </task>
     <servers />
   </component>
