@@ -5,12 +5,14 @@ import io.reactivex.rxjava3.subjects.PublishSubject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 
+// TODO: Make a singleton
 public class ActionManager<TState, TMessage> {
     private AtomicReference<TState> state;
     private final Supplier<UpdateResult<TState>> init;
@@ -18,6 +20,8 @@ public class ActionManager<TState, TMessage> {
     private final BiFunction<TState, TMessage, UpdateResult<TState>> update;
     PublishSubject<Command> commandStream;
     BehaviorSubject<String> subscriptionStream;
+    private HashMap<String, CommandHandler> handlerHashMap;
+
 
     private static final Logger logger
             = LoggerFactory.getLogger(ActionManager.class);
@@ -31,6 +35,7 @@ public class ActionManager<TState, TMessage> {
         this.update = update;
         this.commandStream = PublishSubject.create();
         this.subscriptionStream = BehaviorSubject.create();
+        this.handlerHashMap = new HashMap<>();
     }
 
     public static <TState, TMessage> Builder<TState, TMessage> withUpdate(
@@ -44,14 +49,18 @@ public class ActionManager<TState, TMessage> {
         logger.debug("Initial state: " + initState.toString());
         this.state.set(initState);
 
+        handlerHashMap.put("test", new TestHandler());
+
         // handling commands
         commandStream.subscribe((command) -> {
             ////////////////////////////
             // TODO: Implement command handler loading
             ////////////////////////////
             logger.debug("Command: " + command.toString());
-            if (command.info().name().equals("test")) {
-                subscriptionStream.onNext("result");
+            var handler = handlerHashMap.get(command.info().name());
+            if (handler != null) {
+                var result = handler.handle(command.jsonValue());
+                subscriptionStream.onNext(result);
                 return;
             }
             subscriptionStream.onNext("increment");
