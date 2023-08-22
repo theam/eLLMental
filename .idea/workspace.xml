@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9cad3848-1525-4d25-a87c-214202721c5d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/core/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/ActionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/ActionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/test/java/com/theagilemonkeys/ellmental/core/ActionManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/theagilemonkeys/ellmental/core/ActionManagerTest.java" afterDir="false" />
     </list>
@@ -159,7 +158,7 @@
       <workItem from="1691507960273" duration="17280000" />
       <workItem from="1691687224885" duration="6374000" />
       <workItem from="1692634591758" duration="494000" />
-      <workItem from="1692718708139" duration="3485000" />
+      <workItem from="1692718708139" duration="4333000" />
     </task>
     <servers />
   </component>

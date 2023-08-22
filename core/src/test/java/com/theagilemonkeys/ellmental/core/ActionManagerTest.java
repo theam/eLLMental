@@ -36,13 +36,7 @@ class ActionManagerTest {
         public static UpdateResult<State> update(State current, Msg msg) {
             var counter = current.counter();
             if (msg instanceof Increment) {
-                if (counter == 10) {
-                    return UpdateResult.noCommand(new State(0));
-                }
-                return new UpdateResult<>(
-                        new State(counter + 1),
-                        new Command(new CommandInfo("whatever"), "{}"
-                        ));
+                return UpdateResult.noCommand(new State(counter + 1));
             } else {
                 return UpdateResult.noCommand(new State(counter - 1));
             }
@@ -57,5 +51,13 @@ class ActionManagerTest {
                 .withSub(TestModule::sub)
                 .build();
         am.run();
+
+        am.executeCommand(new Command(new CommandInfo("whatever"), "{}"));
+        am.executeCommand(new Command(new CommandInfo("whatever"), "{}"));
+        am.executeCommand(new Command(new CommandInfo("whatever"), "{}"));
+        am.executeCommand(new Command(new CommandInfo("whatever"), "{}"));
+        am.executeCommand(new Command(new CommandInfo("test"), "{}"));
+        var result = am.waitResult();
+        System.out.println("GOT RESULT" + result);
     }
 }

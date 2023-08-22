@@ -1,5 +1,6 @@
 package com.theagilemonkeys.ellmental.core;
 
+import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,9 @@ public class ActionManager<TState, TMessage> {
     private final Supplier<UpdateResult<TState>> init;
     private final Function<String, TMessage> sub;
     private final BiFunction<TState, TMessage, UpdateResult<TState>> update;
+    PublishSubject<Command> commandStream;
+    BehaviorSubject<String> subscriptionStream;
+
     private static final Logger logger
             = LoggerFactory.getLogger(ActionManager.class);
 
@@ -25,6 +29,8 @@ public class ActionManager<TState, TMessage> {
         this.init = init;
         this.sub = sub;
         this.update = update;
+        this.commandStream = PublishSubject.create();
+        this.subscriptionStream = BehaviorSubject.create();
     }
 
     public static <TState, TMessage> Builder<TState, TMessage> withUpdate(
@@ -38,14 +44,18 @@ public class ActionManager<TState, TMessage> {
         logger.debug("Initial state: " + initState.toString());
         this.state.set(initState);
 
-        PublishSubject<Command> commandStream = PublishSubject.create();
-        PublishSubject<String> subscriptionStream = PublishSubject.create();
-
         // handling commands
         commandStream.subscribe((command) -> {
+            ////////////////////////////
+            // TODO: Implement command handler loading
+            ////////////////////////////
             logger.debug("Command: " + command.toString());
-            Thread.sleep(1000);
+            if (command.info().name().equals("test")) {
+                subscriptionStream.onNext("result");
+                return;
+            }
             subscriptionStream.onNext("increment");
+            ////////////////////////////
         });
 
         // handling subscriptions
@@ -61,6 +71,14 @@ public class ActionManager<TState, TMessage> {
         });
 
         commandStream.onNext(initResult.command());
+    }
+
+    public void executeCommand(Command command) {
+        commandStream.onNext(command);
+    }
+
+    public String waitResult() {
+        return subscriptionStream.blockingFirst();
     }
 
     public static class Builder<TState, TMessage> {
