@@ -1,11 +1,13 @@
 package com.theagilemonkeys.ellmental.core;
 
+import com.theagilemonkeys.ellmental.core.actions.Action;
+import com.theagilemonkeys.ellmental.core.actions.NoOp;
+
 public record UpdateResult<TState>(
         TState newState,
-        Command command
+        Action action
 ) {
-    public static <TState> UpdateResult<TState> noCommand(TState newState) {
-        // FIXME: Change null to a NoOp command
-        return new UpdateResult<>(newState, null);
+    public static <TState> UpdateResult<TState> of(TState newState) {
+        return new UpdateResult<>(newState, NoOp.action());
     }
 }

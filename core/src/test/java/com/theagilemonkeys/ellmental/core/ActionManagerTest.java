@@ -1,17 +1,19 @@
 package com.theagilemonkeys.ellmental.core;
 
+import com.google.gson.JsonNull;
+import com.theagilemonkeys.ellmental.core.actions.ActionResult;
 import org.junit.jupiter.api.Test;
 
 class ActionManagerTest {
 
-    public static class TestModule {
+    public static class TestModule implements Module<TestModule.State, TestModule.Msg> {
 
         record State(
                 int counter
         ) {
         }
 
-        sealed interface Msg permits Increment, Decrement {
+        sealed interface Msg {
         }
 
         record Increment() implements Msg {
@@ -20,44 +22,37 @@ class ActionManagerTest {
         record Decrement() implements Msg {
         }
 
-
-        public static UpdateResult<State> init() {
-            return new UpdateResult<>(new State(0), new Command(new CommandInfo("init"), "{}"));
+        record NoOp() implements Msg {
         }
 
-        public static Msg sub(String jsonString) {
-            if (jsonString.contains("increment")) {
-                return new Increment();
-            } else {
-                return new Decrement();
-            }
+
+        public State initialState() {
+            return new State(0);
         }
 
-        public static UpdateResult<State> update(State current, Msg msg) {
+        public Msg parseMessage(ActionResult actionResult) {
+            return switch (actionResult.messageName()) {
+                case "Increment" -> new Increment();
+                case "Decrement" -> new Decrement();
+                default -> new NoOp();
+            };
+        }
+
+        public UpdateResult<State> update(State current, Msg msg) {
             var counter = current.counter();
             if (msg instanceof Increment) {
-                return UpdateResult.noCommand(new State(counter + 1));
+                return UpdateResult.of(new State(counter + 1));
             } else {
-                return UpdateResult.noCommand(new State(counter - 1));
+                return UpdateResult.of(new State(counter - 1));
             }
         }
     }
 
     @Test
     void testExample() {
-        var am = ActionManager
-                .withUpdate(TestModule::update)
-                .withInit(TestModule::init)
-                .withSub(TestModule::sub)
-                .build();
+        var mod = new TestModule();
+        var am = new ActionManager<>(mod);
         am.run();
-
-        am.executeCommand(new Command(new CommandInfo("whatever"), "{}"));
-        am.executeCommand(new Command(new CommandInfo("whatever"), "{}"));
-        am.executeCommand(new Command(new CommandInfo("whatever"), "{}"));
-        am.executeCommand(new Command(new CommandInfo("whatever"), "{}"));
-        am.executeCommand(new Command(new CommandInfo("test"), "{}"));
-        var result = am.waitResult();
-        System.out.println("GOT RESULT" + result);
+        am.sendMessage("Increment", JsonNull.INSTANCE);
     }
 }
