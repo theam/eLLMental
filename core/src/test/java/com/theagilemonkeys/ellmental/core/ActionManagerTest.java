@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class ActionManagerTest {
 
-    public static class TestModule implements Module<TestModule.State, TestModule.Msg> {
+    public static class TestWorker implements Worker<TestWorker.State, TestWorker.Msg> {
 
         record State(
                 int counter
@@ -50,7 +50,7 @@ class ActionManagerTest {
 
     @Test
     void testExample() {
-        var mod = new TestModule();
+        var mod = new TestWorker();
         var am = new ActionManager<>(mod);
         am.run();
         am.sendMessage("Increment", JsonNull.INSTANCE);

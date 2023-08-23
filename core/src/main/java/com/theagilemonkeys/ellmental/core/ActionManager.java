@@ -20,7 +20,7 @@ import static java.util.Map.entry;
 
 
 // TODO: Make a singleton
-public class ActionManager<TState, TMessage, TModule extends Module<TState, TMessage>> {
+public class ActionManager<TState, TMessage, TModule extends Worker<TState, TMessage>> {
 
     private static final Map<String, ActionHandler> defaultHandlers = Map.ofEntries(
             entry("NoOp", new NoOpHandler())

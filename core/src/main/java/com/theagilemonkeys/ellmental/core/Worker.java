@@ -11,7 +11,7 @@ import com.theagilemonkeys.ellmental.core.actions.ActionResult;
  * @param <TState>
  * @param <TMessage>
  */
-public interface Module<TState, TMessage> {
+public interface Worker<TState, TMessage> {
     public TState initialState();
 
     public TMessage parseMessage(ActionResult actionResult);
