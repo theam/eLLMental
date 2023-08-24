@@ -59,7 +59,7 @@ class WorkerManagerTest {
     void testExample() {
         var mod = new TestWorker();
         var am = new WorkerManager();
-        am.registerWorker(mod.getWorkerName(), mod);
+        am.registerWorker(mod);
         am.run();
         am.sendMessage("Increment", JsonNull.INSTANCE);
     }

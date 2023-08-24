@@ -60,9 +60,15 @@ public class WorkerManager {
         this.handlerManager = HandlerManager.load(defaultHandlers);
     }
 
-    public <T extends Worker<Object, Object>> void registerWorker(
-            String name, T worker) {
-        workers.put(name, new WorkerEntry((Class<Worker<Object, Object>>) worker.getClass(), worker));
+    public <TState extends Object, TMsg extends Object, T extends Worker<TState, TMsg>> void registerWorker(
+            T worker) {
+        // WARNING!
+        //
+        // This function is not type-safe at all, but it's what's required to have a good UX.
+        // If something starts to fail, probably here's the place to look for first.
+        var castWorker = (Worker<Object, Object>) worker;
+        var entry = new WorkerEntry((Class<Worker<Object, Object>>) worker.getClass(), castWorker);
+        workers.put(worker.getWorkerName(), entry);
     }
 
     public void run() {

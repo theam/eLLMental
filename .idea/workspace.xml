@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9cad3848-1525-4d25-a87c-214202721c5d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/ActionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/WorkerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/Worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/theagilemonkeys/ellmental/core/ActionManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/theagilemonkeys/ellmental/core/WorkerManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/WorkerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/WorkerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/theagilemonkeys/ellmental/core/WorkerManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/theagilemonkeys/ellmental/core/WorkerManagerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +94,7 @@
       <recent name="com.theagilemonkeys.ellmental.core" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.ActionManagerTest.testExample">
+  <component name="RunManager" selected="Gradle.WorkerManagerTest.testExample">
     <configuration name="ActionManagerTest.testExample" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -110,6 +109,30 @@
             <option value=":core:test" />
             <option value="--tests" />
             <option value="&quot;com.theagilemonkeys.ellmental.core.ActionManagerTest.testExample&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>true</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="WorkerManagerTest.testExample" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":core:test" />
+            <option value="--tests" />
+            <option value="&quot;com.theagilemonkeys.ellmental.core.WorkerManagerTest.testExample&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -156,6 +179,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.WorkerManagerTest.testExample" />
         <item itemvalue="Gradle.ActionManagerTest.testExample" />
       </list>
     </recent_temporary>
