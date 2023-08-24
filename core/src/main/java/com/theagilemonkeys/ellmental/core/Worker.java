@@ -2,6 +2,8 @@ package com.theagilemonkeys.ellmental.core;
 
 import com.theagilemonkeys.ellmental.core.actions.ActionResult;
 
+import java.util.Optional;
+
 /**
  * Interface for a module.
  * <p>
@@ -12,9 +14,11 @@ import com.theagilemonkeys.ellmental.core.actions.ActionResult;
  * @param <TMessage>
  */
 public interface Worker<TState, TMessage> {
-    public TState initialState();
+    String getWorkerName();
 
-    public TMessage parseMessage(ActionResult actionResult);
+    TState initialState();
 
-    public UpdateResult<TState> update(TState state, TMessage message);
+    Optional<TMessage> parseMessage(ActionResult actionResult);
+
+    UpdateResult<TState> update(TState state, TMessage message);
 }

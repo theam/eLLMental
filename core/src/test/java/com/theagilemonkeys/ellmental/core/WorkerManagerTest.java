@@ -4,7 +4,9 @@ import com.google.gson.JsonNull;
 import com.theagilemonkeys.ellmental.core.actions.ActionResult;
 import org.junit.jupiter.api.Test;
 
-class ActionManagerTest {
+import java.util.Optional;
+
+class WorkerManagerTest {
 
     public static class TestWorker implements Worker<TestWorker.State, TestWorker.Msg> {
 
@@ -26,15 +28,20 @@ class ActionManagerTest {
         }
 
 
+        @Override
+        public String getWorkerName() {
+            return TestWorker.class.getSimpleName();
+        }
+
         public State initialState() {
             return new State(0);
         }
 
-        public Msg parseMessage(ActionResult actionResult) {
+        public Optional<Msg> parseMessage(ActionResult actionResult) {
             return switch (actionResult.messageName()) {
-                case "Increment" -> new Increment();
-                case "Decrement" -> new Decrement();
-                default -> new NoOp();
+                case "Increment" -> Optional.of(new Increment());
+                case "Decrement" -> Optional.of(new Decrement());
+                default -> Optional.empty();
             };
         }
 
@@ -51,7 +58,8 @@ class ActionManagerTest {
     @Test
     void testExample() {
         var mod = new TestWorker();
-        var am = new ActionManager<>(mod);
+        var am = new WorkerManager();
+        am.registerWorker(mod.getWorkerName(), mod);
         am.run();
         am.sendMessage("Increment", JsonNull.INSTANCE);
     }
