@@ -20,9 +20,6 @@ public class TestWorker implements Worker<TestWorker.State, TestWorker.Msg> {
     record Decrement() implements Msg {
     }
 
-    record NoOp() implements Msg {
-    }
-
 
     @Override
     public String getWorkerName() {

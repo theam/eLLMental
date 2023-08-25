@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 class WorkerManagerTest {
     @Test
     void testExample() {
-        var am = new WorkerManager();
-        am.run();
-        am.sendMessage("Increment", JsonNull.INSTANCE);
+        var workerManager = new WorkerManager();
+        workerManager.run();
+        workerManager.sendMessage("Increment", JsonNull.INSTANCE);
     }
 }
