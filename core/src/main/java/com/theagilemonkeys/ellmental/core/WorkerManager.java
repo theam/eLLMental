@@ -12,8 +12,10 @@ import io.reactivex.rxjava3.subjects.PublishSubject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import static java.util.Map.entry;
@@ -60,7 +62,7 @@ public class WorkerManager {
         this.handlerManager = HandlerManager.load(defaultHandlers);
     }
 
-    public <TState extends Object, TMsg extends Object, T extends Worker<TState, TMsg>> void registerWorker(
+    public <TState extends Object, TMsg extends Object, T extends Worker<TState, TMsg>> void registerWorkerClass(
             T worker) {
         // WARNING!
         //
@@ -69,6 +71,39 @@ public class WorkerManager {
         var castWorker = (Worker<Object, Object>) worker;
         var entry = new WorkerEntry((Class<Worker<Object, Object>>) worker.getClass(), castWorker);
         workers.put(worker.getWorkerName(), entry);
+    }
+
+    public void registerWorker(String fullyQualifiedWorkerClassName) {
+        var worker = loadWorkerFromClassString(fullyQualifiedWorkerClassName);
+        if (worker.isEmpty()) {
+            logger.error("Could not load worker class: " + fullyQualifiedWorkerClassName);
+            return;
+        }
+        registerWorkerClass(worker.get());
+    }
+
+    private Optional<Worker<Object, Object>> loadWorkerFromClassString(String fullyQualifiedClassName) {
+        try {
+            // Load the class
+            Class<?> myClass = Class.forName(fullyQualifiedClassName);
+
+            // Create a new instance
+            Object myInstance = myClass.getDeclaredConstructor().newInstance();
+
+            // If you know the type, you can cast it
+            if (myInstance instanceof Worker<?, ?>) {
+                var worker = (Worker<Object, Object>) myInstance;
+                return Optional.of(worker);
+            }
+
+        } catch (ClassNotFoundException |
+                 InstantiationException |
+                 IllegalAccessException |
+                 NoSuchMethodException |
+                 InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     public void run() {

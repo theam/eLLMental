@@ -59,7 +59,7 @@ class WorkerManagerTest {
     void testExample() {
         var mod = new TestWorker();
         var am = new WorkerManager();
-        am.registerWorker(mod);
+        am.registerWorker("com.theagilemonkeys.ellmental.core.WorkerManagerTest$TestWorker");
         am.run();
         am.sendMessage("Increment", JsonNull.INSTANCE);
     }
