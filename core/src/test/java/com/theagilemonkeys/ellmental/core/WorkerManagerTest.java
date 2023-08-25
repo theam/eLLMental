@@ -4,7 +4,6 @@ import com.google.gson.JsonNull;
 import org.junit.jupiter.api.Test;
 
 class WorkerManagerTest {
-
     @Test
     void testExample() {
         var am = new WorkerManager();
