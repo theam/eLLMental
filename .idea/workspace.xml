@@ -32,9 +32,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Record" />
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
+        <option value="Record" />
         <option value="Class" />
       </list>
     </option>
@@ -77,6 +77,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.theagilemonkeys.ellmental.core.configuration" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/core/src" />
       <recent name="$PROJECT_DIR$" />
@@ -90,8 +93,14 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="com.theagilemonkeys.ellmental.core" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="com.theagilemonkeys.ellmental.core" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.theagilemonkeys.ellmental.core.configuration" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.WorkerManagerTest.testExample">
@@ -196,7 +205,7 @@
       <workItem from="1691687224885" duration="6374000" />
       <workItem from="1692634591758" duration="494000" />
       <workItem from="1692718708139" duration="5353000" />
-      <workItem from="1692962558842" duration="1633000" />
+      <workItem from="1692962558842" duration="7083000" />
     </task>
     <servers />
   </component>

@@ -7,6 +7,8 @@ import com.theagilemonkeys.ellmental.core.actionhandlers.NoOpHandler;
 import com.theagilemonkeys.ellmental.core.actions.Action;
 import com.theagilemonkeys.ellmental.core.actions.ActionResult;
 import com.theagilemonkeys.ellmental.core.actions.NoOp;
+import com.theagilemonkeys.ellmental.core.configuration.Configuration;
+import com.theagilemonkeys.ellmental.core.configuration.ConfigurationLoader;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 import org.slf4j.Logger;
@@ -57,6 +59,16 @@ public class WorkerManager {
             = LoggerFactory.getLogger(WorkerManager.class);
 
     public WorkerManager() {
+        var conf = ConfigurationLoader.loadConfiguration();
+        if (conf.isEmpty()) {
+            var path = ConfigurationLoader.getDefaultConfigurationPath();
+            logger.error("Could not load configuration from " + path);
+            throw new RuntimeException("Could not load configuration from " + path);
+        }
+        Configuration configuration = conf.get();
+        configuration.features().forEach(feature -> {
+            registerWorker(feature.getClassName());
+        });
         this.actionRequests = PublishSubject.create();
         this.actionResults = BehaviorSubject.create();
         this.handlerManager = HandlerManager.load(defaultHandlers);
