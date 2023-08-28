@@ -7,14 +7,13 @@ public class GenerateEmbedding {
     public static String name = GenerateEmbedding.class.getSimpleName();
 
     public record ActionInput(
-            String text,
-            String model
+            String text
     ) {
     }
 
-    public static Action action(String inputString, String model) {
+    public static Action action(String inputString) {
         var gson = new Gson();
-        var input = new ActionInput(inputString, model);
+        var input = new ActionInput(inputString);
         return Action
                 .named(name)
                 .withValue(gson.toJsonTree(input));

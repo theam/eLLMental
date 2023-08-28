@@ -1,20 +1,33 @@
 package com.theagilemonkeys.ellmental.embeddingsgeneration.openai;
 
 
-import com.theagilemonkeys.ellmental.core.schema.Embedding;
-import static org.junit.jupiter.api.Assertions.*;
+import com.theagilemonkeys.ellmental.embeddingsgeneration.openai.worker.actionhandlers.OpenAiGenerateEmbeddingHandler;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.junit.jupiter.api.Test;
-
 
 import java.util.List;
 
+import static com.theagilemonkeys.ellmental.embeddingsgeneration.EmbeddingsGenerationModel.generateEmbedding;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class OpenAIEmbeddingsModelTest {
     @Test
-    public void testGenerateEmbedding(){
-        OpenAIEmbeddingsModel openAI = new OpenAIEmbeddingsModel();
-        Embedding embedding =  openAI.generateEmbedding("The Agile Monkeys rule!");
-        TestValues testValues = new TestValues();
+    public void testGenerateEmbedding() {
+        // Initialization
+        var dotenv = Dotenv
+                .configure()
+                .ignoreIfMissing()
+                .ignoreIfMalformed()
+                .load();
+        var apiKey = dotenv.get("OPEN_AI_API_KEY");
+        OpenAiGenerateEmbeddingHandler.use(apiKey);
 
+        // Main code
+        var embedding = generateEmbedding("The Agile Monkeys rule!");
+
+        // Testing
+        var testValues = new TestValues();
         assertEquals(embedding.vector.size(), testValues.testGenerateEmbeddingExpectedValue.size());
         assertArrayEquals(embedding.vector.toArray(), testValues.testGenerateEmbeddingExpectedValue.toArray());
     }

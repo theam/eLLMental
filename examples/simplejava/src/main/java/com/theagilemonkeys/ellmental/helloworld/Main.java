@@ -1,18 +1,17 @@
 package com.theagilemonkeys.ellmental.helloworld;
 
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
-import com.theagilemonkeys.ellmental.embeddingsgeneration.openai.OpenAIEmbeddingsModel;
 import com.theagilemonkeys.ellmental.embeddingsstore.EmbeddingsStore;
 import com.theagilemonkeys.ellmental.embeddingsstore.pinecone.PineconeEmbeddingsStore;
+
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
         // Step 1: generate embeddings from input string
-        OpenAIEmbeddingsModel openAI = new OpenAIEmbeddingsModel();
-        Embedding embedding =  openAI.generateEmbedding("Test");
+        Embedding embedding = openAI.generateEmbedding("Test");
 
         // Step 2: save the generated embeddings to a store (Pinecone in this case)
         EmbeddingsStore embeddingStore = new PineconeEmbeddingsStore();

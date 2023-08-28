@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Optional;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ConfigurationLoader {
@@ -16,7 +16,7 @@ public class ConfigurationLoader {
         return cwd + "/configuration.json";
     }
 
-    public static Optional<Configuration> loadConfiguration() {
+    public static Configuration loadConfiguration() {
         var configurationPath = getDefaultConfigurationPath();
         var gson = new Gson();
 
@@ -39,10 +39,9 @@ public class ConfigurationLoader {
                 }
             });
 
-            var conf = new Configuration(features.collect(Collectors.toList()));
-            return Optional.of(conf);
+            return new Configuration(features.collect(Collectors.toList()));
         } catch (IOException e) {
-            return Optional.empty();
+            return new Configuration(List.of());
         }
     }
 }

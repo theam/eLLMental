@@ -7,7 +7,6 @@ import com.theagilemonkeys.ellmental.core.actionhandlers.NoOpHandler;
 import com.theagilemonkeys.ellmental.core.actions.Action;
 import com.theagilemonkeys.ellmental.core.actions.ActionResult;
 import com.theagilemonkeys.ellmental.core.actions.NoOp;
-import com.theagilemonkeys.ellmental.core.configuration.Configuration;
 import com.theagilemonkeys.ellmental.core.configuration.ConfigurationLoader;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import io.reactivex.rxjava3.subjects.PublishSubject;
@@ -54,19 +53,15 @@ public class WorkerManager {
     PublishSubject<Action> actionRequests;
     BehaviorSubject<ActionResult> actionResults;
     final HandlerManager handlerManager;
+    private boolean isRunning = false;
 
     private static final Logger logger
             = LoggerFactory.getLogger(WorkerManager.class);
+    private static WorkerManager instance;
 
-    public WorkerManager() {
+    private WorkerManager() {
         var conf = ConfigurationLoader.loadConfiguration();
-        if (conf.isEmpty()) {
-            var path = ConfigurationLoader.getDefaultConfigurationPath();
-            logger.error("Could not load configuration from " + path);
-            throw new RuntimeException("Could not load configuration from " + path);
-        }
-        Configuration configuration = conf.get();
-        configuration.features().forEach(feature -> {
+        conf.features().forEach(feature -> {
             registerWorker(feature.getClassName());
         });
         this.actionRequests = PublishSubject.create();
@@ -74,7 +69,28 @@ public class WorkerManager {
         this.handlerManager = HandlerManager.load(defaultHandlers);
     }
 
-    public <TState extends Object, TMsg extends Object, T extends Worker<TState, TMsg>> void registerWorkerClass(
+    public static void ensureWorkerManagerIsRunning() {
+        if (instance == null) {
+            WorkerManager.instance = new WorkerManager();
+        }
+        WorkerManager.getInstance().run();
+    }
+
+    public static WorkerManager getInstance() {
+        ensureWorkerManagerIsRunning();
+        return instance;
+    }
+
+    public static void registerActionHandler(String actionName, ActionHandler handler) {
+        var instance = getInstance();
+        if (instance.handlerManager.getHandler(actionName).isPresent()) {
+            logger.warn("Handler for " + actionName + " already registered, ignoring");
+            return;
+        }
+        getInstance().handlerManager.addHandler(actionName, handler);
+    }
+
+    public static <TState extends Object, TMsg extends Object, T extends Worker<TState, TMsg>> void registerWorkerInstance(
             T worker) {
         // WARNING!
         //
@@ -82,19 +98,22 @@ public class WorkerManager {
         // If something starts to fail, probably here's the place to look for first.
         var castWorker = (Worker<Object, Object>) worker;
         var entry = new WorkerEntry((Class<Worker<Object, Object>>) worker.getClass(), castWorker);
-        workers.put(worker.getWorkerName(), entry);
+        if (getInstance().workers.containsKey(worker.getWorkerName())) {
+            return;
+        }
+        getInstance().workers.put(worker.getWorkerName(), entry);
     }
 
-    public void registerWorker(String fullyQualifiedWorkerClassName) {
-        var worker = loadWorkerFromClassString(fullyQualifiedWorkerClassName);
+    public static void registerWorker(String fullyQualifiedWorkerClassName) {
+        var worker = getInstance().loadWorkerFromClassString(fullyQualifiedWorkerClassName);
         if (worker.isEmpty()) {
             logger.error("Could not load worker class: " + fullyQualifiedWorkerClassName);
             return;
         }
-        registerWorkerClass(worker.get());
+        registerWorkerInstance(worker.get());
     }
 
-    private Optional<Worker<Object, Object>> loadWorkerFromClassString(String fullyQualifiedClassName) {
+    private static Optional<Worker<Object, Object>> loadWorkerFromClassString(String fullyQualifiedClassName) {
         try {
             // Load the class
             Class<?> myClass = Class.forName(fullyQualifiedClassName);
@@ -122,6 +141,7 @@ public class WorkerManager {
         initializeWorkerStates();
         actionRequests.subscribe(this::handleActionRequest);
         actionResults.subscribe(this::handleActionResult);
+        isRunning = true;
     }
 
     private void handleActionRequest(Action action) {
@@ -187,8 +207,8 @@ public class WorkerManager {
      *
      * @param action
      */
-    public void runAction(Action action) {
-        actionRequests.onNext(action);
+    public static void runAction(Action action) {
+        getInstance().actionRequests.onNext(action);
     }
 
     /**
@@ -197,8 +217,8 @@ public class WorkerManager {
      * @param messageName
      * @return
      */
-    public JsonElement waitActionResult(String messageName) {
-        return actionResults
+    public static JsonElement waitActionResult(String messageName) {
+        return getInstance().actionResults
                 .filter(r -> r.messageName().contentEquals(messageName))
                 .blockingFirst()
                 .value();
@@ -210,19 +230,19 @@ public class WorkerManager {
      * @param action
      * @return
      */
-    public JsonElement runActionSync(Action action) {
+    public static JsonElement runActionSync(Action action) {
         var uuid = UUID.randomUUID().toString();
-        actionRequests.onNext(action.withMessage(uuid));
+        getInstance().actionRequests.onNext(action.withMessage(uuid));
         return waitActionResult(uuid);
     }
 
     /**
-     * Sends a message to the module.
+     * Sends a message to the workers.
      *
      * @param messageName
      * @param value
      */
-    public void sendMessage(String messageName, JsonElement value) {
+    public static void sendMessage(String messageName, JsonElement value) {
         var action = NoOp.action()
                 .withMessage(messageName)
                 .withValue(value);

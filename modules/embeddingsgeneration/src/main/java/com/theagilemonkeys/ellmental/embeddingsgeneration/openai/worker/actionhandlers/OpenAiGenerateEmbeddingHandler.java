@@ -8,40 +8,45 @@ import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import com.theagilemonkeys.ellmental.embeddingsgeneration.openai.worker.actions.GenerateEmbedding;
 import com.theokanning.openai.embedding.EmbeddingRequest;
 import com.theokanning.openai.service.OpenAiService;
-import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenerateEmbeddingHandler implements ActionHandler {
+import static com.theagilemonkeys.ellmental.core.WorkerManager.registerActionHandler;
+
+public class OpenAiGenerateEmbeddingHandler implements ActionHandler {
     private final Gson gson = new Gson();
     private static OpenAiService service;
+    private static final String DEFAULT_EMBEDDING_MODEL = "text-embedding-ada-002";
 
-
-    public OpenAiService getService() {
-        if (service == null) {
-            var dotenv = Dotenv
-                    .configure()
-                    .ignoreIfMissing()
-                    .ignoreIfMalformed()
-                    .load();
-            String openAIKey = dotenv.get("OPEN_AI_API_KEY");
-            if (openAIKey == null) {
-                throw new EnvironmentVariableNotDeclaredException("Environment variable OPEN_AI_API_KEY is not declared.");
-            }
-            service = new OpenAiService(openAIKey);
+    public OpenAiGenerateEmbeddingHandler(String apiKey) {
+        if (apiKey == null) {
+            throw new EnvironmentVariableNotDeclaredException("Environment variable OPEN_AI_API_KEY is not declared.");
         }
-        return service;
+        service = new OpenAiService(apiKey);
     }
+
+
+    public static void use(String apiKey) {
+        var instance = new OpenAiGenerateEmbeddingHandler(apiKey);
+        registerActionHandler(GenerateEmbedding.name, instance);
+    }
+
 
     @Override
     public JsonElement handle(JsonElement actionJson) {
         // Parse the input
         var input = gson.fromJson(actionJson, GenerateEmbedding.ActionInput.class);
         var inputString = input.text();
-        var embeddingOpenAiModel = input.model();
 
+        // Generate the embedding
+        Embedding result = generateEmbedding(inputString);
 
+        // Return the result as JSON
+        return gson.toJsonTree(result);
+    }
+
+    private Embedding generateEmbedding(String inputString) {
         // TODO: the embeddings function from the library uses an array as input. We are
         // only using a length 1 array.
         // Check if we should implement an array option.
@@ -49,17 +54,18 @@ public class GenerateEmbeddingHandler implements ActionHandler {
         embeddingsInput.add(inputString);
 
         EmbeddingRequest embeddingRequest = EmbeddingRequest.builder()
-                .model(embeddingOpenAiModel)
+                .model(OpenAiGenerateEmbeddingHandler.DEFAULT_EMBEDDING_MODEL)
                 .input(embeddingsInput)
                 .build();
 
-        List<Double> embedding = this.getService()
+        List<Double> embedding = service
                 .createEmbeddings(embeddingRequest)
                 .getData()
                 .get(0)
                 .getEmbedding();
 
-        var result = new Embedding(embedding);
-        return gson.toJsonTree(result);
+        return new Embedding(embedding);
     }
+
+
 }

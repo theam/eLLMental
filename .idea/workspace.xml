@@ -7,7 +7,15 @@
     <list default="true" id="9cad3848-1525-4d25-a87c-214202721c5d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/WorkerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/WorkerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/theagilemonkeys/ellmental/core/WorkerManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/theagilemonkeys/ellmental/core/WorkerManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/actionhandlers/ActionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/actionhandlers/ActionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/configuration/ConfigurationLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/configuration/ConfigurationLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/simplejava/src/main/java/com/theagilemonkeys/ellmental/helloworld/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/examples/simplejava/src/main/java/com/theagilemonkeys/ellmental/helloworld/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/EmbeddingsGenerationModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/EmbeddingsGenerationModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/OpenAIEmbeddingsModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/OpenAiWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/OpenAiWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/actionhandlers/GenerateEmbeddingHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/actionhandlers/OpenAiGenerateEmbeddingHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/actions/GenerateEmbedding.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/actions/GenerateEmbedding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/test/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/OpenAIEmbeddingsModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/test/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/OpenAIEmbeddingsModelTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,6 +214,8 @@
       <workItem from="1692634591758" duration="494000" />
       <workItem from="1692718708139" duration="5353000" />
       <workItem from="1692962558842" duration="7083000" />
+      <workItem from="1693215759372" duration="2261000" />
+      <workItem from="1693241597025" duration="3876000" />
     </task>
     <servers />
   </component>
