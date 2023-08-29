@@ -3,8 +3,8 @@ package com.theagilemonkeys.ellmental.embeddingsgeneration;
 
 import com.google.gson.Gson;
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
+import com.theagilemonkeys.ellmental.embeddingsgeneration.actions.GenerateEmbedding;
 import com.theagilemonkeys.ellmental.embeddingsgeneration.openai.worker.OpenAiWorker;
-import com.theagilemonkeys.ellmental.embeddingsgeneration.openai.worker.actions.GenerateEmbedding;
 
 import static com.theagilemonkeys.ellmental.core.WorkerManager.*;
 

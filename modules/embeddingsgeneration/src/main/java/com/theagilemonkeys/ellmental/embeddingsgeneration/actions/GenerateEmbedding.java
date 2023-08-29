@@ -1,4 +1,4 @@
-package com.theagilemonkeys.ellmental.embeddingsgeneration.openai.worker.actions;
+package com.theagilemonkeys.ellmental.embeddingsgeneration.actions;
 
 import com.google.gson.Gson;
 import com.theagilemonkeys.ellmental.core.actions.Action;

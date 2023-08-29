@@ -1,11 +1,11 @@
-package com.theagilemonkeys.ellmental.embeddingsgeneration.openai.worker.actionhandlers;
+package com.theagilemonkeys.ellmental.embeddingsgeneration.actionhandlers;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.theagilemonkeys.ellmental.core.actionhandlers.ActionHandler;
 import com.theagilemonkeys.ellmental.core.errors.EnvironmentVariableNotDeclaredException;
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
-import com.theagilemonkeys.ellmental.embeddingsgeneration.openai.worker.actions.GenerateEmbedding;
+import com.theagilemonkeys.ellmental.embeddingsgeneration.actions.GenerateEmbedding;
 import com.theokanning.openai.embedding.EmbeddingRequest;
 import com.theokanning.openai.service.OpenAiService;
 

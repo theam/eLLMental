@@ -1,20 +1,46 @@
 package com.theagilemonkeys.ellmental.embeddingsstore.pinecone;
 
 
+import com.theagilemonkeys.ellmental.core.errors.EnvironmentVariableNotDeclaredException;
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.theagilemonkeys.ellmental.embeddingsstore.EmbeddingsStore;
+import com.theagilemonkeys.ellmental.embeddingsstore.actionhandlers.pinecone.SimilaritySearchHandler;
+import com.theagilemonkeys.ellmental.embeddingsstore.actionhandlers.pinecone.StoreEmbeddingHandler;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.junit.jupiter.api.Test;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.theagilemonkeys.ellmental.embeddingsstore.EmbeddingsStore.storeEmbedding;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class PineconeEmbeddingsStoreTest {
     //TODO: add mock reponse to improve store test
     @Test
-    public void testStore(){
-        EmbeddingsStore embeddingStore = new PineconeEmbeddingsStore();
+    public void testStore() {
+        var dotenv = Dotenv
+                .configure()
+                .ignoreIfMissing()
+                .ignoreIfMalformed()
+                .load();
+        var url = dotenv.get("PINECONE_URL");
+        var apiKey = dotenv.get("PINECONE_API_KEY");
+
+        if (url == null) {
+            throw new EnvironmentVariableNotDeclaredException("Environement variable PINECONE_URL is not declared.");
+        }
+
+        if (apiKey == null) {
+            throw new EnvironmentVariableNotDeclaredException(
+                    "Environement variable PINECONE_API_KEY is not declared.");
+        }
+
+        SimilaritySearchHandler.use(url, apiKey);
+        StoreEmbeddingHandler.use(url, apiKey);
+
+
         TestValues testValues = new TestValues();
         Embedding embedding = new Embedding(testValues.testGenerateEmbeddingExpectedValue);
 
@@ -22,7 +48,7 @@ public class PineconeEmbeddingsStoreTest {
         metadata.put("key1", "value1");
         metadata.put("key2", "value2");
 
-        embeddingStore.store(embedding, metadata);
+        storeEmbedding(embedding, metadata);
 
         assertEquals(embedding.vector.size(), testValues.testGenerateEmbeddingExpectedValue.size());
         assertArrayEquals(embedding.vector.toArray(), testValues.testGenerateEmbeddingExpectedValue.toArray());

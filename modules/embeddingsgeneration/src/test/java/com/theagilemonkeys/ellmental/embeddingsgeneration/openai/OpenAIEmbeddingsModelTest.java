@@ -1,7 +1,7 @@
 package com.theagilemonkeys.ellmental.embeddingsgeneration.openai;
 
 
-import com.theagilemonkeys.ellmental.embeddingsgeneration.openai.worker.actionhandlers.OpenAiGenerateEmbeddingHandler;
+import com.theagilemonkeys.ellmental.embeddingsgeneration.actionhandlers.OpenAiGenerateEmbeddingHandler;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.junit.jupiter.api.Test;
 

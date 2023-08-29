@@ -3,11 +3,11 @@ package com.theagilemonkeys.ellmental.core;
 import com.google.gson.JsonNull;
 import org.junit.jupiter.api.Test;
 
+import static com.theagilemonkeys.ellmental.core.WorkerManager.sendMessage;
+
 class WorkerManagerTest {
     @Test
     void testExample() {
-        var workerManager = new WorkerManager();
-        workerManager.run();
-        workerManager.sendMessage("Increment", JsonNull.INSTANCE);
+        sendMessage("Increment", JsonNull.INSTANCE);
     }
 }

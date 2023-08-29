@@ -5,7 +5,7 @@ import com.theagilemonkeys.ellmental.core.UpdateResult;
 import com.theagilemonkeys.ellmental.core.Worker;
 import com.theagilemonkeys.ellmental.core.actions.ActionResult;
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
-import com.theagilemonkeys.ellmental.embeddingsgeneration.openai.worker.actions.GenerateEmbedding;
+import com.theagilemonkeys.ellmental.embeddingsgeneration.actions.GenerateEmbedding;
 
 import java.util.Optional;
 

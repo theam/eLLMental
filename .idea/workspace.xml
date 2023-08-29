@@ -6,16 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="9cad3848-1525-4d25-a87c-214202721c5d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/WorkerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/WorkerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/actionhandlers/ActionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/actionhandlers/ActionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/configuration/ConfigurationLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/configuration/ConfigurationLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/theagilemonkeys/ellmental/core/WorkerManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/theagilemonkeys/ellmental/core/WorkerManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/simplejava/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/examples/simplejava/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/simplejava/src/main/java/com/theagilemonkeys/ellmental/helloworld/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/examples/simplejava/src/main/java/com/theagilemonkeys/ellmental/helloworld/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/EmbeddingsGenerationModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/EmbeddingsGenerationModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/OpenAIEmbeddingsModel.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/OpenAiWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/OpenAiWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/actionhandlers/GenerateEmbeddingHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/actionhandlers/OpenAiGenerateEmbeddingHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/actions/GenerateEmbedding.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/actions/GenerateEmbedding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/actionhandlers/OpenAiGenerateEmbeddingHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/actionhandlers/OpenAiGenerateEmbeddingHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/worker/actions/GenerateEmbedding.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/actions/GenerateEmbedding.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/test/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/OpenAIEmbeddingsModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/test/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/OpenAIEmbeddingsModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/EmbeddingsStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/EmbeddingsStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/PineconeEmbeddingsStore.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/QueryVectorRequestSchema.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/actionhandlers/pinecone/common/QueryVectorRequestSchema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/QueryVectorResponseSchema.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/actionhandlers/pinecone/common/QueryVectorResponseSchema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/UpsertVectorSchema.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/actionhandlers/pinecone/common/UpsertVectorSchema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsstore/src/test/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/PineconeEmbeddingsStoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsstore/src/test/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/PineconeEmbeddingsStoreTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +112,7 @@
       <recent name="com.theagilemonkeys.ellmental.core" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.theagilemonkeys.ellmental.embeddingsstore.actionhandlers.pinecone" />
       <recent name="com.theagilemonkeys.ellmental.core.configuration" />
     </key>
   </component>
@@ -215,7 +220,7 @@
       <workItem from="1692718708139" duration="5353000" />
       <workItem from="1692962558842" duration="7083000" />
       <workItem from="1693215759372" duration="2261000" />
-      <workItem from="1693241597025" duration="3876000" />
+      <workItem from="1693241597025" duration="11839000" />
     </task>
     <servers />
   </component>

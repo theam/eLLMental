@@ -18,6 +18,7 @@ dependencies {
     implementation project(':modules:embeddingsgeneration')
     implementation project(':modules:embeddingsstore')
     implementation project(':core')
+    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
