@@ -16,10 +16,7 @@ public class Main {
 
         // Step 2: save the generated embeddings to a store (Pinecone in this case)
         EmbeddingsStore embeddingStore = new PineconeEmbeddingsStore();
-        Map<String, String> metadata = new HashMap<>();
-        metadata.put("key1", "value1");
-        metadata.put("key2", "value2");
-        embeddingStore.store(embedding, metadata);
+        embeddingStore.store(embedding);
 
         // Step 3: search for the embedding in the store
         List<Embedding> searchEmbeddings = embeddingStore.similaritySearch(embedding, 5);

@@ -11,30 +11,52 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+/**
+ * OpenAI `EmbeddingsGenerationModel` implementation.
+ */
 public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
-    private static OpenAiService service;
+    private static String openAIKey;
+    private static OpenAiService cachedService;
     public static String embeddingOpenAiModel = "text-embedding-ada-002";
 
+    /**
+     * Constructor that initializes the OpenAI embeddings model.
+     * It will try to load the API key from the environment variable `OPEN_AI_API_KEY`.
+     */
     public OpenAIEmbeddingsModel() {
-        var dotenv = Dotenv
-                .configure()
-                .ignoreIfMissing()
-                .ignoreIfMalformed()
-                .load();
-        String openAIKey = dotenv.get("OPEN_AI_API_KEY");
-        if (openAIKey == null) {
-            throw new EnvironmentVariableNotDeclaredException("Environment variable OPEN_AI_API_KEY is not declared.");
-        }
-        service = new OpenAiService(openAIKey);
-
+        this(null);
     }
 
-    public Embedding generateEmbedding(String inputString) {
+    /**
+     * Constructor that initializes the OpenAI embeddings model with an explicit API Key.
+     *
+     * @param openAIKey OpenAI API key.
+     */
+    public OpenAIEmbeddingsModel(String APIKey) {
+        if (APIKey != null) {
+            openAIKey = APIKey;
+        } else { // Tries to load it from the environment variable
+            var dotenv = Dotenv
+                    .configure()
+                    .ignoreIfMissing()
+                    .ignoreIfMalformed()
+                    .load();
+            openAIKey = dotenv.get("OPEN_AI_API_KEY");
+        }
+    }
 
-        // TODO: the embeddings function from the library uses an array as input. We are
-        // only using a length 1 array.
-        // Check if we should implement an array option.
+    /**
+     * Generates an embedding for the given input string.
+     *
+     * @param inputString Input string to generate the embedding for.
+     * @return An embedding object for the given text.
+     */
+    public Embedding generateEmbedding(String inputString) {
+        /* TODO: the embeddings function from the library uses an array as input.
+            We are only using a length 1 array. Should implement an array option? */
         List<String> embeddingsInput = new ArrayList<>();
         embeddingsInput.add(inputString);
 
@@ -43,8 +65,27 @@ public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
                 .input(embeddingsInput)
                 .build();
 
-        List<Double> embedding = service.createEmbeddings(embeddingRequest).getData().get(0).getEmbedding();
+        List<Double> vector = getService()
+                .createEmbeddings(embeddingRequest)
+                .getData()
+                .get(0)
+                .getEmbedding();
 
-        return new Embedding(embedding);
+        Map<String, String> metadata = new java.util.HashMap<>();
+        metadata.put("input", inputString);
+        metadata.put("source", "OpenAI");
+        metadata.put("model", embeddingOpenAiModel);
+        metadata.put("createdAt", java.time.LocalDateTime.now().toString());
+        return new Embedding(UUID.randomUUID(), vector, metadata);
+    }
+
+    private OpenAiService getService() {
+        if (cachedService == null) {
+            if (openAIKey == null) {
+                throw new EnvironmentVariableNotDeclaredException("Environment variable OPEN_AI_API_KEY is required.");
+            }
+            cachedService = new OpenAiService(openAIKey);
+        }
+        return cachedService;
     }
 }

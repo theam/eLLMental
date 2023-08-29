@@ -15,8 +15,8 @@ public class OpenAIEmbeddingsModelTest {
         Embedding embedding =  openAI.generateEmbedding("The Agile Monkeys rule!");
         TestValues testValues = new TestValues();
 
-        assertEquals(embedding.vector.size(), testValues.testGenerateEmbeddingExpectedValue.size());
-        assertArrayEquals(embedding.vector.toArray(), testValues.testGenerateEmbeddingExpectedValue.toArray());
+        assertEquals(embedding.vector().size(), testValues.testGenerateEmbeddingExpectedValue.size());
+        assertArrayEquals(embedding.vector().toArray(), testValues.testGenerateEmbeddingExpectedValue.toArray());
     }
 }
 

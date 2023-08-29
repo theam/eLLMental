@@ -11,26 +11,6 @@ Leveraging the power of embeddings models, this component allows you to represen
 [//]: # (TODO: Highlight this as a warning message in Docusaurus)
 > **Warning**: The current version supports the [OpenAI embeddings model](https://platform.openai.com/docs/guides/embeddings) and [Pinecone](https://www.pinecone.io) for storage. Please provide the necessary credentials for these services. Note: these services may involve costs, always review their pricing details before use.
 
-## `Embedding` object
-
-In eLLMental embeddings are represented by the `Embedding` class, which has the following attributes:
-
-- `id`: The unique identifier of the embedding.
-- `embedding`: The numeric representation of the text.
-- `metadata`: Additional information associated with the embedding.
-- `createdAt`: The timestamp of the embedding creation.
-- `modelId`: The identifier of the embeddings model used to generate the embedding.
-
-```java
-public class Embedding {
-    private final String id;
-    private final float[] embedding;
-    private final Map<String, String> metadata;
-    private final Instant createdAt;
-    private final String modelId;
-}
-```
-
 The `EmbeddingsSpaceComponent` interface defines the following methods:
 
 ## Constructor

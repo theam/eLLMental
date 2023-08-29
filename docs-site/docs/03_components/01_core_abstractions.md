@@ -1,6 +1,23 @@
 # Core Abstractions
 
-eLLMental uses different 3rd party components and APIs and provides a unified interface. To ensure extensibility and avoid tight coupling with any specific API, the library provides a series of abstract classes that define the expected interface for these components to work with eLLMental. To use eLLMental, you can provide your own implementation or use one of the built-in concrete implementations.  
+eLLMental uses different 3rd party components and APIs and provides a unified interface. To ensure extensibility and avoid tight coupling with any specific API, the library provides a series of abstract classes that define the expected interface for these components to work with eLLMental. To use eLLMental, you can provide your own implementation or use one of the built-in concrete implementations.
+
+## `Embedding` object
+
+In eLLMental embeddings are represented by the `Embedding` record, which has the following attributes:
+
+- `id`: An unique identifier of the embedding.
+- `vector`: A numeric vector that represents the semantic location of the text.
+- `metadata`: Additional information associated with the embedding. It can be used to store the original text, the model used to generate the embedding, or any other information you may find useful.
+
+```java
+public record Embedding(
+        UUID id,
+        List<Double> vector,
+        Map<String, String> metadata
+) {}
+
+```
 
 ## `EmbeddingsGenerationModel`
 
@@ -17,11 +34,14 @@ public abstract class EmbeddingsGenerationModel {
 eLLMental provides an implementation to use [OpenAI's embeddings model](https://platform.openai.com/docs/guides/embeddings). This model is only accessible via API, so you'll need to initialize it with a valid OpenAI API key.
 
 ```java
+// You can explicitly initialize the model with your API key, or use the constructor without parameters and set the `OPENAI_API_KEY` environment variable.
 EmbeddingsGenerationModel openAIModel = new OpenAIEmbeddingsGenerationModel("YOUR_OPENAI_API_KEY");
 
-// You'll rarely need to interact directly with the `openAIModel`, but you can use it to generate an embedding:
-openAIModel.generateEmbedding("Sample string");
+// You'll rarely need to interact directly with the `openAIModel`, but you can use it to generate an embedding object:
+Embedding embedding = openAIModel.generateEmbedding("Sample string");
 ```
+
+The OpenAI embeddings generator will automatically include the original text, the timestamp and the model used to generate the embedding in the metadata. 
 
 ## `EmbeddingsStore`
 
@@ -29,7 +49,7 @@ This abstract class defines the expected interface for a persistence mechanism c
 
 ```java
 public abstract class EmbeddingsStore {
-    public abstract void store(Embedding embedding, Metadata metadata);
+    public abstract void store(Embedding embedding);
     public abstract List<Embedding> similaritySearch(Embedding reference, int limit);
 }
 ```
@@ -39,9 +59,10 @@ public abstract class EmbeddingsStore {
 eLLMental provides a concrete implementation for Pinecone, which requires defining an URL, an API Key and a space.
 
 ```java
-EmbeddingsStore pineconeStore = new PineconeEmbeddingsStore("YOUR_PINECONE_URL", "YOUR_PINECONE_API_KEY", "YOUR_PINECONE_SPACE");
+// You can explicitly initialize the store with your credentials, or use the constructor with no parameters and set the `PINECONE_URL`, `PINECONE_API_KEY` and `PINECONE_NAMESPACE` environment variables.
+EmbeddingsStore pineconeStore = new PineconeEmbeddingsStore("YOUR_PINECONE_URL", "YOUR_PINECONE_API_KEY", "YOUR_PINECONE_NAMESPACE");
 
-// You can insert or perform similarity searches using this object. Metadata is optional.
-pineconeStore.store(someEmbedding, someMetadata);
+// You can now insert or perform similarity searches using the pineconeStore instance:
+pineconeStore.store(someEmbedding);
 List<Embedding> similarEmbeddings = pineconeStore.similaritySearch(referenceEmbedding, 5);
 ```

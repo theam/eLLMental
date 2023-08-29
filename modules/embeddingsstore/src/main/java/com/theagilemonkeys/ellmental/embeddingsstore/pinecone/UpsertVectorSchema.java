@@ -4,16 +4,16 @@ package com.theagilemonkeys.ellmental.embeddingsstore.pinecone;
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 public class UpsertVectorSchema {
     List<Vector> vectors;
 
-    UpsertVectorSchema(Embedding embedding, Map<String,String> metadata ) {
+    UpsertVectorSchema(Embedding embedding) {
         vectors = new ArrayList<>();
-        vectors.add(new Vector(UUID.randomUUID().toString(), embedding.vector, metadata));
+        vectors.add(new Vector(embedding.id(), embedding.vector(), embedding.metadata()));
     }
 
 }
@@ -23,7 +23,7 @@ class SparseValues {
 }
 class  Vector {
 
-    Vector (String id, List<Double> values, Map<String,String> metadata) {
+    Vector (UUID id, List<Double> values, Map<String,String> metadata) {
         this.id = id;
         this.values = values;
         this.metadata = metadata;
@@ -32,5 +32,5 @@ class  Vector {
     public SparseValues sparseValues;
     public Map<String,String> metadata;
     public List<Double> values;
-    public String id;
+    public UUID id;
 }
