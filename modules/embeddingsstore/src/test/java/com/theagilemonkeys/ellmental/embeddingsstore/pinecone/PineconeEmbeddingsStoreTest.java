@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class PineconeEmbeddingsStoreTest {
     //TODO: add mock reponse to improve store test
@@ -16,16 +17,17 @@ public class PineconeEmbeddingsStoreTest {
     public void testStore(){
         EmbeddingsStore embeddingStore = new PineconeEmbeddingsStore();
         TestValues testValues = new TestValues();
-        Embedding embedding = new Embedding(testValues.testGenerateEmbeddingExpectedValue);
 
         Map<String, String> metadata = new HashMap<>();
         metadata.put("key1", "value1");
         metadata.put("key2", "value2");
 
-        embeddingStore.store(embedding, metadata);
+        Embedding embedding = new Embedding(UUID.randomUUID(), testValues.testGenerateEmbeddingExpectedValue, metadata);
 
-        assertEquals(embedding.vector.size(), testValues.testGenerateEmbeddingExpectedValue.size());
-        assertArrayEquals(embedding.vector.toArray(), testValues.testGenerateEmbeddingExpectedValue.toArray());
+        embeddingStore.store(embedding);
+
+        assertEquals(embedding.vector().size(), testValues.testGenerateEmbeddingExpectedValue.size());
+        assertArrayEquals(embedding.vector().toArray(), testValues.testGenerateEmbeddingExpectedValue.toArray());
     }
 }
 

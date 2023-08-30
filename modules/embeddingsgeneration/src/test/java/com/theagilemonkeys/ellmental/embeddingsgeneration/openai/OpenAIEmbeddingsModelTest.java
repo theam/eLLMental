@@ -11,12 +11,12 @@ import java.util.List;
 public class OpenAIEmbeddingsModelTest {
    @Test
     public void testGenerateEmbedding(){
-        OpenAIEmbeddingsModel openAI = new OpenAIEmbeddingsModel();
+        OpenAIEmbeddingsModel openAI = new OpenAIEmbeddingsModel("fakeAPIKey");
         Embedding embedding =  openAI.generateEmbedding("The Agile Monkeys rule!");
         TestValues testValues = new TestValues();
 
-        assertEquals(embedding.vector.size(), testValues.testGenerateEmbeddingExpectedValue.size());
-        assertArrayEquals(embedding.vector.toArray(), testValues.testGenerateEmbeddingExpectedValue.toArray());
+        assertEquals(embedding.vector().size(), testValues.testGenerateEmbeddingExpectedValue.size());
+        assertArrayEquals(embedding.vector().toArray(), testValues.testGenerateEmbeddingExpectedValue.toArray());
     }
 }
 
