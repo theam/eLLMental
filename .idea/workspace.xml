@@ -5,15 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cad3848-1525-4d25-a87c-214202721c5d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.envrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flake.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/flake.nix" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/schema/Embedding.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/theagilemonkeys/ellmental/core/schema/Embedding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs-site/docs/03_components/01_core_abstractions.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs-site/docs/03_components/01_core_abstractions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs-site/docs/03_components/02_embeddings_space.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs-site/docs/03_components/02_embeddings_space.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/simplejava/src/main/java/com/theagilemonkeys/ellmental/helloworld/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/examples/simplejava/src/main/java/com/theagilemonkeys/ellmental/helloworld/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/EmbeddingsGenerationModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/EmbeddingsGenerationModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/OpenAIEmbeddingsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/main/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/OpenAIEmbeddingsModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsgeneration/src/test/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/OpenAIEmbeddingsModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsgeneration/src/test/java/com/theagilemonkeys/ellmental/embeddingsgeneration/openai/OpenAIEmbeddingsModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/EmbeddingsStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/EmbeddingsStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/PineconeEmbeddingsStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/PineconeEmbeddingsStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/QueryVectorResponseSchema.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/QueryVectorResponseSchema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/UpsertVectorSchema.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsstore/src/main/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/UpsertVectorSchema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/embeddingsstore/src/test/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/PineconeEmbeddingsStoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/embeddingsstore/src/test/java/com/theagilemonkeys/ellmental/embeddingsstore/pinecone/PineconeEmbeddingsStoreTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,11 +29,34 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="eLLMental" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2Thv794LljpJB6whwEafjMfg13O" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -37,25 +64,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TODO_SCOPE": "All Places",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "jdk.selected.JAVA_MODULE": "openjdk-20",
-    "last_opened_file_path": "/Users/javier/projects/eLLMental",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-20&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/javier/projects/eLLMental&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -70,7 +97,7 @@
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
+        <option name="scriptParameters" value="--scan" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -111,6 +138,8 @@
       <workItem from="1691507960273" duration="17280000" />
       <workItem from="1691687224885" duration="6374000" />
       <workItem from="1692634591758" duration="494000" />
+      <workItem from="1693322245615" duration="4859000" />
+      <workItem from="1693327144223" duration="2385000" />
     </task>
     <servers />
   </component>
