@@ -5,12 +5,10 @@ import com.theagilemonkeys.ellmental.embeddingsstore.EmbeddingsStore;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
-import com.theagilemonkeys.ellmental.core.errors.EnvironmentVariableNotDeclaredException;
+import com.theagilemonkeys.ellmental.core.errors.MissingRequiredCredentialException;
 import okhttp3.*;
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
-import io.github.cdimascio.dotenv.Dotenv;
 
 /**
  * Implementation for Pinecone EmbeddingsStore
@@ -21,13 +19,13 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
     private final String namespace;
 
     /**
-     * Constructor that initializes the Pinecone embeddings store loading the configuration from environment variables:
-     *  It will load the API key from the environment variable `PINECONE_API_KEY`.
-     *  It will load the URL from the environment variable `PINECONE_URL`.
-     *  It will load the namespace from the environment variable `PINECONE_NAMESPACE`.
+     * Constructor that initializes the Pinecone embeddings store with an explicit url and an apiKey without using a namespace.
+     *
+     * @param url Pinecone URL.
+     * @param apiKey Pinecone API key.
      */
-    public PineconeEmbeddingsStore() {
-        this(null, null, null);
+    public PineconeEmbeddingsStore(String url, String apiKey) {
+        this(url, apiKey, null);
     }
 
     /**
@@ -38,16 +36,6 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
      * @param namespace Pinecone namespace.
      */
     public PineconeEmbeddingsStore(String url, String apiKey, String namespace) {
-        if (url == null || apiKey == null || namespace == null) {
-            var dotenv = Dotenv
-                    .configure()
-                    .ignoreIfMissing()
-                    .ignoreIfMalformed()
-                    .load();
-            if (url == null) url = dotenv.get("PINECONE_URL");
-            if (apiKey == null) apiKey = dotenv.get("PINECONE_API_KEY");
-            if (namespace == null) namespace = dotenv.get("PINECONE_NAMESPACE");
-        }
         this.url = url;
         this.apiKey = apiKey;
         this.namespace = namespace;
@@ -96,10 +84,9 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
 
     private boolean validateEnvironment() {
         if (url == null) {
-            throw new EnvironmentVariableNotDeclaredException("Environment variable PINECONE_URL is not declared.");
+            throw new MissingRequiredCredentialException("A Pinecone URL must be set.");
         } else if (apiKey == null) {
-            throw new EnvironmentVariableNotDeclaredException(
-                    "Environment variable PINECONE_API_KEY is not declared.");
+            throw new MissingRequiredCredentialException("Pinecone API key is required.");
         }
         // TODO: check if namespace is required. From Pinecone documentation this doesn't seem to be the case, so I removed the check here.
         return true;

@@ -1,13 +1,11 @@
 package com.theagilemonkeys.ellmental.embeddingsgeneration.openai;
 
-import com.theagilemonkeys.ellmental.core.errors.EnvironmentVariableNotDeclaredException;
+import com.theagilemonkeys.ellmental.core.errors.MissingRequiredCredentialException;
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import com.theagilemonkeys.ellmental.embeddingsgeneration.EmbeddingsGenerationModel;
 
 import com.theokanning.openai.embedding.EmbeddingRequest;
 import com.theokanning.openai.service.OpenAiService;
-
-import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,29 +21,12 @@ public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
     public static String embeddingOpenAiModel = "text-embedding-ada-002";
 
     /**
-     * Constructor that initializes the OpenAI embeddings model.
-     * It will try to load the API key from the environment variable `OPEN_AI_API_KEY`.
-     */
-    public OpenAIEmbeddingsModel() {
-        this(null);
-    }
-
-    /**
      * Constructor that initializes the OpenAI embeddings model with an explicit API Key.
      *
-     * @param openAIKey OpenAI API key.
+     * @param APIKey OpenAI API key.
      */
     public OpenAIEmbeddingsModel(String APIKey) {
-        if (APIKey != null) {
-            openAIKey = APIKey;
-        } else { // Tries to load it from the environment variable
-            var dotenv = Dotenv
-                    .configure()
-                    .ignoreIfMissing()
-                    .ignoreIfMalformed()
-                    .load();
-            openAIKey = dotenv.get("OPEN_AI_API_KEY");
-        }
+        openAIKey = APIKey;
     }
 
     /**
@@ -82,7 +63,7 @@ public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
     private OpenAiService getService() {
         if (cachedService == null) {
             if (openAIKey == null) {
-                throw new EnvironmentVariableNotDeclaredException("Environment variable OPEN_AI_API_KEY is required.");
+                throw new MissingRequiredCredentialException("OpenAI API key is required.");
             }
             cachedService = new OpenAiService(openAIKey);
         }

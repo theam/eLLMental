@@ -4,18 +4,16 @@ import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import com.theagilemonkeys.ellmental.embeddingsgeneration.openai.OpenAIEmbeddingsModel;
 import com.theagilemonkeys.ellmental.embeddingsstore.EmbeddingsStore;
 import com.theagilemonkeys.ellmental.embeddingsstore.pinecone.PineconeEmbeddingsStore;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         // Step 1: generate embeddings from input string
-        OpenAIEmbeddingsModel openAI = new OpenAIEmbeddingsModel();
+        OpenAIEmbeddingsModel openAI = new OpenAIEmbeddingsModel("fakeAPIKey");
         Embedding embedding =  openAI.generateEmbedding("Test");
 
         // Step 2: save the generated embeddings to a store (Pinecone in this case)
-        EmbeddingsStore embeddingStore = new PineconeEmbeddingsStore();
+        EmbeddingsStore embeddingStore = new PineconeEmbeddingsStore("fakeurl", "fakeAPIKey");
         embeddingStore.store(embedding);
 
         // Step 3: search for the embedding in the store

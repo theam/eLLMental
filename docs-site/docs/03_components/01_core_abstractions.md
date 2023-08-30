@@ -34,7 +34,6 @@ public abstract class EmbeddingsGenerationModel {
 eLLMental provides an implementation to use [OpenAI's embeddings model](https://platform.openai.com/docs/guides/embeddings). This model is only accessible via API, so you'll need to initialize it with a valid OpenAI API key.
 
 ```java
-// You can explicitly initialize the model with your API key, or use the constructor without parameters and set the `OPENAI_API_KEY` environment variable.
 EmbeddingsGenerationModel openAIModel = new OpenAIEmbeddingsGenerationModel("YOUR_OPENAI_API_KEY");
 
 // You'll rarely need to interact directly with the `openAIModel`, but you can use it to generate an embedding object:
@@ -59,7 +58,6 @@ public abstract class EmbeddingsStore {
 eLLMental provides a concrete implementation for Pinecone, which requires defining an URL, an API Key and a space.
 
 ```java
-// You can explicitly initialize the store with your credentials, or use the constructor with no parameters and set the `PINECONE_URL`, `PINECONE_API_KEY` and `PINECONE_NAMESPACE` environment variables.
 EmbeddingsStore pineconeStore = new PineconeEmbeddingsStore("YOUR_PINECONE_URL", "YOUR_PINECONE_API_KEY", "YOUR_PINECONE_NAMESPACE");
 
 // You can now insert or perform similarity searches using the pineconeStore instance:
