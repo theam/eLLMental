@@ -66,18 +66,11 @@ Generates and persists an embedding for a given text.
 
 - **Parameters**:
     - `text`: Text to be embedded.
-    - `additionalMetadata`: (Optional) Additional metadata.
 - **Returns**: The generated embedding.
 
 ```java
-Map<String, String> additionalMetadata = new HashMap<>();
-additionalMetadata.put("key", "value");
-
 String sampleText = "Hello, eLLMental!";
-Embedding embedding = embeddingsSpace.save(sampleText, additionalMetadata);
-
-// Or just
-Embedding embedding = embeddingSpace.save(sampleText);
+Embedding embedding = embeddingsSpace.save(sampleText);
 ```
 
 ## `mostSimilarEmbeddings`
