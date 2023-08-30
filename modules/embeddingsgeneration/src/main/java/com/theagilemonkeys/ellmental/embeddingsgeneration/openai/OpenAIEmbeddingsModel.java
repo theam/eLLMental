@@ -60,12 +60,17 @@ public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
         return new Embedding(UUID.randomUUID(), vector, metadata);
     }
 
+    // We initialize the service with the API key in a protected method, so we can mock it in tests
+    protected OpenAiService createOpenAiService(String apiKey) {
+        return new OpenAiService(apiKey);
+    }
+
     private OpenAiService getService() {
         if (cachedService == null) {
             if (openAIKey == null) {
                 throw new MissingRequiredCredentialException("OpenAI API key is required.");
             }
-            cachedService = new OpenAiService(openAIKey);
+            cachedService = createOpenAiService(openAIKey);
         }
         return cachedService;
     }
