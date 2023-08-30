@@ -1,40 +1,42 @@
 package com.theagilemonkeys.ellmental.embeddingsgeneration.openai;
 
-
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
+import static org.mockito.Mockito.*;
 import com.theokanning.openai.embedding.EmbeddingResult;
 import com.theokanning.openai.service.OpenAiService;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.UUID;
-
-
 import java.util.List;
 
+@ExtendWith(MockitoExtension.class)
 public class OpenAIEmbeddingsModelTest {
-   @Test
-    public void testGenerateEmbedding(){
-        OpenAIEmbeddingsModel openAI = new OpenAIEmbeddingsModel("fakeAPIKey") {
-            @Override
-            protected OpenAiService createOpenAiService(String apiKey) {
-                OpenAiService mockService = mock(OpenAiService.class);
+    @Mock
+    private OpenAiService openAiService;
 
-                com.theokanning.openai.embedding.Embedding vector = new com.theokanning.openai.embedding.Embedding();
-                TestValues testValues = new TestValues();
-                vector.setEmbedding(testValues.testGenerateEmbeddingExpectedValue);
-                EmbeddingResult result = new EmbeddingResult();
-                result.setData(List.of(vector));
+    private OpenAIEmbeddingsModel openAIEmbeddingsModel;
 
-                when(mockService.createEmbeddings(any())).thenReturn(result);
-                return mockService;
-            }
-        };
-        Embedding embedding = openAI.generateEmbedding("The Agile Monkeys rule!");
+    @BeforeEach
+    public void setUp() {
+        openAIEmbeddingsModel = new OpenAIEmbeddingsModel("fakeAPIKey");
+        openAIEmbeddingsModel.openAiService = openAiService;
+    }
+
+    @Test
+    public void testGenerateEmbedding() {
+        com.theokanning.openai.embedding.Embedding vector = new com.theokanning.openai.embedding.Embedding();
         TestValues testValues = new TestValues();
+        vector.setEmbedding(testValues.testGenerateEmbeddingExpectedValue);
+        EmbeddingResult result = new EmbeddingResult();
+        result.setData(List.of(vector));
+
+        when(openAiService.createEmbeddings(any())).thenReturn(result);
+
+        Embedding embedding = openAIEmbeddingsModel.generateEmbedding("The Agile Monkeys rule!");
 
         // The id is not null and is a valid UUID
         assertNotNull(embedding.id());
@@ -60,7 +62,6 @@ public class OpenAIEmbeddingsModelTest {
         assertDoesNotThrow(() -> java.time.LocalDateTime.parse(createdAt));
     }
 }
-
 
 class TestValues {
     List<Double> testGenerateEmbeddingExpectedValue = List.of(

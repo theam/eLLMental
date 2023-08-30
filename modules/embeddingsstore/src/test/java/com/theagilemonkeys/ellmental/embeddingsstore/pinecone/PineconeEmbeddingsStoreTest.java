@@ -7,16 +7,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import com.theagilemonkeys.ellmental.embeddingsstore.EmbeddingsStore;
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Spy;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
@@ -27,14 +22,11 @@ import java.util.UUID;
 
 @ExtendWith(MockitoExtension.class)
 public class PineconeEmbeddingsStoreTest {
-    //TODO: add mock reponse to improve store test
-
-    @InjectMocks
     private PineconeEmbeddingsStore pineconeEmbeddingsStore;
-    @Spy
-    private OkHttpClient okHttpClient;
     @Mock
-    private Call httpCall;
+    private OkHttpClient httpClient;
+    @Mock
+    private Call remoteCall;
 
     private final String url = "https://pinecone.url";
     private final String apiKey = "API_KEY";
@@ -47,26 +39,92 @@ public class PineconeEmbeddingsStoreTest {
     @BeforeEach
     void setup() {
         pineconeEmbeddingsStore = new PineconeEmbeddingsStore(url, apiKey, namespace);
+        pineconeEmbeddingsStore.httpClient = httpClient;
     }
-
 
     @Test
     public void testStore() throws IOException {
+        Response response = new Response.Builder()
+            .request(new Request.Builder().url(url + "/vectors/upsert").build())
+            .protocol(Protocol.HTTP_1_1)
+            .code(200).message("").body(ResponseBody.create(MediaType.parse("application/json"), ""))
+            .build();
+        when(remoteCall.execute()).thenReturn(response);
+        when(httpClient.newCall(any())).thenReturn(remoteCall);
+
         Map<String, String> metadata = new HashMap<>();
         metadata.put("key1", "value1");
         metadata.put("key2", "value2");
 
-        //when(okHttpClient.newCall(any(Request.class)).execute()).thenReturn(null);
+        Embedding embedding = new Embedding(UUID.randomUUID(), vectorExpectedValue, metadata);
+
+        assertDoesNotThrow(() -> pineconeEmbeddingsStore.store(embedding));
+    }
+
+    @Test
+    public void testStoreBadRequest() throws IOException {
+        Response response = new Response.Builder()
+            .request(new Request.Builder().url(url + "/vectors/upsert").build())
+            .protocol(Protocol.HTTP_1_1)
+            .code(400).message("").body(ResponseBody.create(MediaType.parse("application/json"), ""))
+            .build();
+        when(remoteCall.execute()).thenReturn(response);
+        when(httpClient.newCall(any())).thenReturn(remoteCall);
+
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("key1", "value1");
+        metadata.put("key2", "value2");
 
         Embedding embedding = new Embedding(UUID.randomUUID(), vectorExpectedValue, metadata);
 
-        pineconeEmbeddingsStore.store(embedding);
-
-        assertEquals(embedding.vector().size(), vectorExpectedValue.size());
-        assertArrayEquals(embedding.vector().toArray(), vectorExpectedValue.toArray());
-
-        verify(okHttpClient).newCall(any(Request.class));
+        assertThrows(RuntimeException.class, () -> pineconeEmbeddingsStore.store(embedding));
     }
 
-    // TODO: get and delete methods
+    @Test
+    public void testSimilaritySearch() throws IOException {
+        UUID fakeUUID1 = UUID.randomUUID();
+        UUID fakeUUID2 = UUID.randomUUID();
+        Response response = new Response.Builder()
+            .request(new Request.Builder().url(url + "/query").build())
+            .protocol(Protocol.HTTP_1_1)
+            .code(200).message("").body(ResponseBody.create(
+                MediaType.parse("application/json"),
+                "{ \"matches\": [ { \"id\": \"" + fakeUUID1 + "\", \"score\": 0.5, \"values\": [ 0.1, 0.2, 0.3 ], \"metadata\": { \"key1\": \"value1\" } }, { \"id\": \"" + fakeUUID2 + "\", \"score\": 0.7, \"values\": [ 0.4, 0.5, 0.6 ], \"metadata\": { \"key2\": \"value2\" } } ] }"
+            ))
+            .build();
+        when(remoteCall.execute()).thenReturn(response);
+        when(httpClient.newCall(any())).thenReturn(remoteCall);
+        Embedding embedding = new Embedding(UUID.randomUUID(), List.of(0.1, 0.2, 0.3), Map.of("key1", "value1", "key2", "value2"));
+
+        List<Embedding> embeddings = pineconeEmbeddingsStore.similaritySearch(embedding, 2);
+
+        // It includes all the embeddings in the response
+        assertEquals(2, embeddings.size());
+
+        // Embeddings come in the right order and the UUIDs were parsed correctly
+        assertEquals(fakeUUID2, embeddings.get(0).id());
+        assertEquals(fakeUUID1, embeddings.get(1).id());
+
+        // Embeddings values were parsed correctly
+        assertEquals(List.of(0.4, 0.5, 0.6), embeddings.get(0).vector());
+        assertEquals(List.of(0.1, 0.2, 0.3), embeddings.get(1).vector());
+
+        // Embeddings metadata was parsed correctly
+        assertEquals(Map.of("key2", "value2"), embeddings.get(0).metadata());
+        assertEquals(Map.of("key1", "value1"), embeddings.get(1).metadata());
+    }
+
+    @Test
+    public void testSimilaritySearchBadRequest() throws IOException {
+        Response response = new Response.Builder()
+            .request(new Request.Builder().url(url + "/query").build())
+            .protocol(Protocol.HTTP_1_1)
+            .code(400).message("").body(ResponseBody.create(MediaType.parse("application/json"), ""))
+            .build();
+        when(remoteCall.execute()).thenReturn(response);
+        when(httpClient.newCall(any())).thenReturn(remoteCall);
+        Embedding embedding = new Embedding(UUID.randomUUID(), List.of(0.1, 0.2, 0.3), Map.of("key1", "value1", "key2", "value2"));
+
+        assertThrows(RuntimeException.class, () -> pineconeEmbeddingsStore.similaritySearch(embedding, 2));
+    }
 }
