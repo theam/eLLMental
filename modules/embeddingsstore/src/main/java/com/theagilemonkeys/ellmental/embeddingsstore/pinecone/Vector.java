@@ -10,8 +10,8 @@ import java.util.UUID;
 @Data
 public class Vector {
 
-    private SparseValues sparseValues;
-    private final Map<String,String> metadata;
-    private final List<Double> values;
     private final UUID id;
+    private final List<Double> values;
+    private final Map<String,String> metadata;
+    private SparseValues sparseValues;
 }

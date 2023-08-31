@@ -15,7 +15,7 @@ public class PineconeEmbeddingsStoreTest {
     //TODO: add mock reponse to improve store test
     @Test
     public void testStore(){
-        EmbeddingsStore embeddingStore = new PineconeEmbeddingsStore();
+        EmbeddingsStore embeddingStore = new PineconeEmbeddingsStore("", "", "");
         TestValues testValues = new TestValues();
 
         Map<String, String> metadata = new HashMap<>();
@@ -29,6 +29,8 @@ public class PineconeEmbeddingsStoreTest {
         assertEquals(embedding.vector().size(), testValues.testGenerateEmbeddingExpectedValue.size());
         assertArrayEquals(embedding.vector().toArray(), testValues.testGenerateEmbeddingExpectedValue.toArray());
     }
+
+    // TODO: get and delete methods
 }
 
 

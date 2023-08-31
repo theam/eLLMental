@@ -7,6 +7,8 @@ import java.util.*;
 
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import com.theagilemonkeys.ellmental.core.errors.MissingRequiredCredentialException;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import okhttp3.*;
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 
