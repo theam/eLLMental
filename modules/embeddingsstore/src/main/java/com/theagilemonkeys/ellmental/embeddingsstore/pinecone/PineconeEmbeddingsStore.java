@@ -3,8 +3,8 @@ package com.theagilemonkeys.ellmental.embeddingsstore.pinecone;
 import com.google.gson.Gson;
 import com.theagilemonkeys.ellmental.embeddingsstore.EmbeddingsStore;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import com.theagilemonkeys.ellmental.core.errors.MissingRequiredCredentialException;
 import okhttp3.*;
@@ -57,6 +57,51 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
 
     }
 
+    /**
+     * Retrieves and embedding in the embeddings store based on its UUID.
+     * @param uuid UUID to retrieve.
+     */
+    public Embedding get(UUID uuid) {
+        Embedding embedding = null;
+        try {
+            embedding = this.fetch(List.of(uuid), null);
+        } catch (IOException e) {
+            System.out.println("VectorStore error on fetch: " + e.getMessage());
+        }
+        return embedding;
+    }
+
+    /**
+     * Retrieves and embedding in the embeddings store based on its UUID.
+     * @param uuid UUID to retrieve.
+     * @param namespace String to look into.
+     */
+    public Embedding get(UUID uuid, String namespace) {
+        Embedding embedding = null;
+        try {
+            embedding = this.fetch(List.of(uuid), namespace);
+        } catch (IOException e) {
+            System.out.println("VectorStore error on fetch: " + e.getMessage());
+        }
+        return embedding;
+    }
+
+    /**
+     * Deletes an embedding in the embeddings store based on its UUID.
+     * @param uuid UUID to delete.
+     */
+    public void delete(UUID uuid) {
+        DeleteVectorSchema request = new DeleteVectorSchema(List.of(uuid));
+        String requestBodyJson = new Gson().toJson(request);
+
+        try {
+            this.post("/vectors/delete", requestBodyJson);
+        } catch (IOException e) {
+            System.out.println("VectorStore error on delete: " + e.getMessage());
+        }
+
+    }
+
     public List<Embedding> similaritySearch(Embedding reference, int limit) {
         QueryVectorRequestSchema body = new QueryVectorRequestSchema(
                 limit,
@@ -90,6 +135,45 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
         }
         // TODO: check if namespace is required. From Pinecone documentation this doesn't seem to be the case, so I removed the check here.
         return true;
+    }
+
+    private Embedding fetch(List<UUID> ids, String namespace) throws IOException {
+        if (!validateEnvironment()) {
+            return null;
+        }
+
+        HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(this.url + "/vectors/fetch")).newBuilder();
+        urlBuilder.addQueryParameter("ids", ids.toString());
+        if (namespace != null) {
+            urlBuilder.addQueryParameter("namespace", namespace);
+        }
+
+        HttpUrl url = urlBuilder.build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .header("accept", "application/json")
+                .header("content-type", "application/json")
+                .header("Api-Key", apiKey)
+                .get()
+                .build();
+
+        try (Response response = new OkHttpClient().newCall(request).execute()) {
+            if (response.code() >= HTTP_BAD_REQUEST) {
+                throw new IOException(this.url);
+            }
+
+            ResponseBody responseBody = response.body();
+
+            if (responseBody != null) {
+                String json = responseBody.string();
+                FetchVectorResponseSchema responseSchema = new Gson().fromJson(json, FetchVectorResponseSchema.class);
+                Vector vector = responseSchema.getVectors().get(0);
+                return new Embedding(vector.getId(), vector.getValues(), vector.getMetadata());
+            } else {
+                return null;
+            }
+        }
     }
 
     private String post(String path, String bodyString) throws IOException {
