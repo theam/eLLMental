@@ -55,7 +55,7 @@ public abstract class EmbeddingsStore {
 
 ### `PineconeEmbeddingsStore`
 
-eLLMental provides a concrete implementation for Pinecone, which requires defining a URL, an API Key and a space.
+eLLMental provides a concrete implementation for Pinecone, which requires defining a URL, an API Key, and a namespace.
 
 ```java
 EmbeddingsStore pineconeStore = new PineconeEmbeddingsStore("YOUR_PINECONE_URL", "YOUR_PINECONE_API_KEY", "YOUR_PINECONE_NAMESPACE");
