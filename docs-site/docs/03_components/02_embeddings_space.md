@@ -23,41 +23,17 @@ EmbeddingsStore pineconeStore = new PineconeEmbeddingsStore("YOUR_PINECONE_URL",
 EmbeddingsSpaceComponent embeddingsSpace = new EmbeddingsSpaceComponent(openAIModel, pineconeStore);
 ```
 
-## `generate`
-
-Generates an embedding from a text without persisting it.
-
-- **Parameters**:
-    - `text`: The textual input for embedding.
-    - `additionalMetadata`: Supplementary metadata associated with the text.
-- **Returns**: The generated embedding.
-
-```java
-String sampleText = "Hello, eLLMental!";
-Map<String, String> additionalMetadata = new HashMap<>();
-additionalMetadata.put("key", "value");
-
-Embedding embedding = embeddingsSpace.generate(sampleText, additionalMetadata);
-```
-
 ## `save`
 
 Generates and persists an embedding for a given text.
 
 - **Parameters**:
     - `text`: Text to be embedded.
-    - `additionalMetadata`: (Optional) Additional metadata.
 - **Returns**: The generated embedding.
 
 ```java
-Map<String, String> additionalMetadata = new HashMap<>();
-additionalMetadata.put("key", "value");
-
 String sampleText = "Hello, eLLMental!";
-Embedding embedding = embeddingsSpace.save(sampleText, additionalMetadata);
-
-// Or just
-Embedding embedding = embeddingSpace.save(sampleText);
+Embedding embedding = embeddingsSpace.save(sampleText);
 ```
 
 ## `mostSimilarEmbeddings`
