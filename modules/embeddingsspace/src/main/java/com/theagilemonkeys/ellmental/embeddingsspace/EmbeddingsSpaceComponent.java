@@ -3,19 +3,16 @@ package com.theagilemonkeys.ellmental.embeddingsspace;
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import com.theagilemonkeys.ellmental.embeddingsgeneration.EmbeddingsGenerationModel;
 import com.theagilemonkeys.ellmental.embeddingsstore.EmbeddingsStore;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 public class EmbeddingsSpaceComponent {
 
     private final EmbeddingsGenerationModel embeddingsGenerationModel;
     private final EmbeddingsStore embeddingsStore;
-
-    public EmbeddingsSpaceComponent(EmbeddingsGenerationModel embeddingsGenerationModel, EmbeddingsStore embeddingsStore) {
-        this.embeddingsGenerationModel = embeddingsGenerationModel;
-        this.embeddingsStore = embeddingsStore;
-    }
 
     private Embedding generate(String text) {
         return embeddingsGenerationModel.generateEmbedding(text);
