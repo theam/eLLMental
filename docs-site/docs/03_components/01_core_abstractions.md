@@ -63,7 +63,15 @@ EmbeddingsStore pineconeStore = new PineconeEmbeddingsStore("YOUR_PINECONE_URL",
 // You can now insert, fetch, delete or perform similarity searches using the pineconeStore instance:
 pineconeStore.store(someEmbedding);
 List<Embedding> similarEmbeddings = pineconeStore.similaritySearch(referenceEmbedding, 5);
-Embedding embedding = pineconeStore.get("my-uuid");
-Embedding anotherEmbedding = pineconeStore.get("my-uuid", "my-namespace");
-pineconeStore.delete("my-uuid");
+
+// Get back an embedding by id without a namespace
+UUID someEmbeddingId = someEmbedding.id()
+Embedding embedding = pineconeStore.get(someEmbeddingId);
+
+// Get a namespaced embedding by id
+UUID anotherEmbeddingId = UUID.fromString("01870603-f211-7b9a-a7ea-4a98f5320ff8")
+Embedding anotherEmbedding = pineconeStore.get(anotherEmbeddingId, "my-namespace");
+
+// Delete an embedding by id
+pineconeStore.delete(anotherEmbeddingId);
 ```
