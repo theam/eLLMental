@@ -2,7 +2,7 @@ name: Continuous Integration
 
 on:
   pull_request:
-#    branches: [ "main", "release" ]
+    branches: [ "main", "release" ]
   workflow_dispatch:
 
 env:
