@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class OpenAIEmbeddingsModelTest {
-    @Test
+   @Test
     public void testGenerateEmbedding(){
         OpenAIEmbeddingsModel openAI = new OpenAIEmbeddingsModel("fakeAPIKey");
         Embedding embedding =  openAI.generateEmbedding("The Agile Monkeys rule!");

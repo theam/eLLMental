@@ -4,6 +4,6 @@ include(
         "core",
         "modules:embeddingsgeneration",
         "modules:embeddingsstore",
+        "modules:embeddingsspace",
         "examples:simplejava"
 )
-

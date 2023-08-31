@@ -41,5 +41,4 @@ public class EmbeddingsSpaceComponent {
     public void delete(UUID uuid) {
         embeddingsStore.delete(uuid);
     }
-
 }
