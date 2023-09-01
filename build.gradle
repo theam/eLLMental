@@ -22,6 +22,10 @@ subprojects {
     group = rootGroup
     version = rootVersion
 
+    java {
+        sourceCompatibility = '17'
+    }
+
     apply plugin: 'maven-publish'
 
     repositories {
