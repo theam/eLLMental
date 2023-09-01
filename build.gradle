@@ -22,12 +22,17 @@ subprojects {
     group = rootGroup
     version = rootVersion
 
-    java {
-        sourceCompatibility = '17'
-    }
 
+    apply plugin: 'java'
     apply plugin: 'maven-publish'
 
+    sourceCompatibility = '17'
+
+    java {
+        withSourcesJar()
+        withJavadocJar()
+    }
+    
     repositories {
         mavenCentral()
     }
