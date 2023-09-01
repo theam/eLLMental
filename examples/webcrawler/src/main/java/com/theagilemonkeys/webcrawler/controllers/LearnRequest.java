@@ -11,7 +11,6 @@ public record LearnRequest(
 record SiteSelector(
         String selector,
         String url,
-
         Integer limit
 ) {
 }
