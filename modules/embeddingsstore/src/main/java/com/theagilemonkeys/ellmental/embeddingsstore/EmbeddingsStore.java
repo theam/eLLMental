@@ -2,6 +2,7 @@ package com.theagilemonkeys.ellmental.embeddingsstore;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
 
@@ -11,5 +12,7 @@ import com.theagilemonkeys.ellmental.core.schema.Embedding;
 public abstract class EmbeddingsStore {
     //TODO: check if there is an issue using a map instead of a metadata class
     public abstract void store(Embedding embedding);
+    public abstract Embedding get(UUID uuid);
+    public abstract void delete(UUID uuid);
     public abstract List<Embedding> similaritySearch(Embedding reference, int limit);
 }
