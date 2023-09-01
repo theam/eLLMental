@@ -41,7 +41,7 @@ public class CrawlerController {
     @PostMapping("/generateembedding")
     public GenerateEmbeddingsResponse generateEmbedding(@RequestBody LearnRequest request) {
         ArrayList<ScrapingResult> results = new ArrayList<>();
-
+        // TODO: seems redundant to the /scrape endpoint logic. Refactor?
         request.siteSelectors().forEach(siteSelector ->
         {
             try {
