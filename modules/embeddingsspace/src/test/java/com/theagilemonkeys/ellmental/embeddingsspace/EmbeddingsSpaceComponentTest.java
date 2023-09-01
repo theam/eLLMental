@@ -16,7 +16,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class EmbeddingsSpaceComponentTest {
-
     @Mock
     private EmbeddingsGenerationModel embeddingsGenerationModel;
     @Mock

@@ -4,10 +4,10 @@ import com.google.gson.Gson;
 import com.theagilemonkeys.ellmental.embeddingsstore.EmbeddingsStore;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import com.theagilemonkeys.ellmental.core.errors.MissingRequiredCredentialException;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import okhttp3.*;
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
@@ -15,20 +15,14 @@ import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 /**
  * Implementation for Pinecone EmbeddingsStore
  */
+@RequiredArgsConstructor
 public class PineconeEmbeddingsStore extends EmbeddingsStore {
     private final String url;
     private final String apiKey;
-    private final String namespace;
-
-    /**
-     * Constructor that initializes the Pinecone embeddings store with an explicit url and an apiKey without using a namespace.
-     *
-     * @param url Pinecone URL.
-     * @param apiKey Pinecone API key.
-     */
-    public PineconeEmbeddingsStore(String url, String apiKey) {
-        this(url, apiKey, null);
-    }
+    private String namespace;
+    // This attribute has no modifier to be package-private, so it can be mocked in tests.
+    // This field will be accessible within this package, but not outside of it.
+    OkHttpClient httpClient = new OkHttpClient();
 
     /**
      * Constructor that initializes the Pinecone embeddings store with an explicit url, apiKey and namespace.
@@ -55,6 +49,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
             this.post("/vectors/upsert", requestBodyJson);
         } catch (IOException e) {
             System.out.println("VectorStore error on upsert: " + e.getMessage());
+            throw new RuntimeException(e);
         }
 
     }
@@ -116,16 +111,17 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
         try {
             String responseString = this.post("/query", requestBodyJson);
             QueryVectorResponseSchema response = new Gson().fromJson(responseString, QueryVectorResponseSchema.class);
-            ArrayList<Embedding> matchEmbeddings = new ArrayList<>();
 
-            for (Match match : response.matches) { // TODO: Make sure this array is sorted by similarity using the score field
-                matchEmbeddings.add(new Embedding(match.id, match.values, match.metadata));
-            }
-
-            return matchEmbeddings;
+            // Sort the matches by similarity using the score field and map them to Embedding objects
+            return response
+                    .matches
+                    .stream()
+                    .sorted((a, b) -> Double.compare(b.score, a.score))
+                    .map(match -> new Embedding(match.id, match.values, match.metadata))
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             System.out.println("VectorStore error on upsert: " + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 
@@ -194,7 +190,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
                 .post(body)
                 .build();
 
-        try (Response response = new OkHttpClient().newCall(request).execute()) {
+        try (Response response = httpClient.newCall(request).execute()) {
             if (response.code() >= HTTP_BAD_REQUEST) {
                 throw new IOException(url);
             }

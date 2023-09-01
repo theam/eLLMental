@@ -16,9 +16,12 @@ import java.util.UUID;
  * OpenAI `EmbeddingsGenerationModel` implementation.
  */
 public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
-    private static String openAIKey;
-    private static OpenAiService cachedService;
+    private final String openAIKey;
     public static String embeddingOpenAiModel = "text-embedding-ada-002";
+
+    // This attribute needs no modifier to allow injection from tests,
+    // It is accessible for other classes in this package, but won't be accessible to end users.
+    OpenAiService openAiService;
 
     /**
      * Constructor that initializes the OpenAI embeddings model with an explicit API Key.
@@ -61,12 +64,12 @@ public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
     }
 
     private OpenAiService getService() {
-        if (cachedService == null) {
+        if (openAiService == null) {
             if (openAIKey == null) {
                 throw new MissingRequiredCredentialException("OpenAI API key is required.");
             }
-            cachedService = new OpenAiService(openAIKey);
+            openAiService = new OpenAiService(openAIKey);
         }
-        return cachedService;
+        return openAiService;
     }
 }

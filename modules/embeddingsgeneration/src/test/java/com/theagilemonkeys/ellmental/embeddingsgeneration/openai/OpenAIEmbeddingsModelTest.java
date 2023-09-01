@@ -1,25 +1,67 @@
 package com.theagilemonkeys.ellmental.embeddingsgeneration.openai;
 
-
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
-
-
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+import com.theokanning.openai.embedding.EmbeddingResult;
+import com.theokanning.openai.service.OpenAiService;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
+import java.util.UUID;
 import java.util.List;
 
+@ExtendWith(MockitoExtension.class)
 public class OpenAIEmbeddingsModelTest {
-   @Test
-    public void testGenerateEmbedding(){
-        OpenAIEmbeddingsModel openAI = new OpenAIEmbeddingsModel("fakeAPIKey");
-        Embedding embedding =  openAI.generateEmbedding("The Agile Monkeys rule!");
-        TestValues testValues = new TestValues();
+    @Mock
+    private OpenAiService openAiService;
 
+    private OpenAIEmbeddingsModel openAIEmbeddingsModel;
+
+    @BeforeEach
+    public void setUp() {
+        openAIEmbeddingsModel = new OpenAIEmbeddingsModel("fakeAPIKey");
+        openAIEmbeddingsModel.openAiService = openAiService;
+    }
+
+    @Test
+    public void testGenerateEmbedding() {
+        com.theokanning.openai.embedding.Embedding vector = new com.theokanning.openai.embedding.Embedding();
+        TestValues testValues = new TestValues();
+        vector.setEmbedding(testValues.testGenerateEmbeddingExpectedValue);
+        EmbeddingResult result = new EmbeddingResult();
+        result.setData(List.of(vector));
+
+        when(openAiService.createEmbeddings(any())).thenReturn(result);
+
+        Embedding embedding = openAIEmbeddingsModel.generateEmbedding("The Agile Monkeys rule!");
+
+        // The id is not null and is a valid UUID
+        assertNotNull(embedding.id());
+        assertDoesNotThrow(() -> UUID.fromString(embedding.id().toString()));
+
+        // The embedding is properly set
         assertEquals(embedding.vector().size(), testValues.testGenerateEmbeddingExpectedValue.size());
         assertArrayEquals(embedding.vector().toArray(), testValues.testGenerateEmbeddingExpectedValue.toArray());
+
+        // The original input is retrievable from the metadata
+        String input = embedding.metadata().get("input");
+        assertEquals(input, "The Agile Monkeys rule!");
+
+        // The source and model are set to the right parameters
+        String source = embedding.metadata().get("source");
+        assertEquals(source, "OpenAI");
+        String model = embedding.metadata().get("model");
+        assertEquals(model, OpenAIEmbeddingsModel.embeddingOpenAiModel);
+
+        // createdAt is set and is a valid date
+        String createdAt = embedding.metadata().get("createdAt");
+        assertNotNull(createdAt);
+        assertDoesNotThrow(() -> java.time.LocalDateTime.parse(createdAt));
     }
 }
-
 
 class TestValues {
     List<Double> testGenerateEmbeddingExpectedValue = List.of(
