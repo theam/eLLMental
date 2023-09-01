@@ -35,6 +35,17 @@ subprojects {
     dependencies{
 
     }
+
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId project.group
+                artifactId project.name
+                version project.version
+                from components.java
+            }
+        }
+    }
 }
 
 tasks.test {
