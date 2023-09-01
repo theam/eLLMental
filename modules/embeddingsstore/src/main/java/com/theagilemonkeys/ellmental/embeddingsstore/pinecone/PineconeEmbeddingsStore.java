@@ -22,6 +22,8 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
     private String namespace;
     // This attribute has no modifier to be package-private, so it can be mocked in tests.
     // This field will be accessible within this package, but not outside of it.
+    // In the future, we can see if MockWebServer from OkHttpClient works to simplify this:
+    // https://github.com/square/okhttp/blob/master/mockwebserver-junit5/README.md
     OkHttpClient httpClient = new OkHttpClient();
 
     /**
@@ -64,6 +66,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
             embedding = this.fetch(List.of(uuid), null);
         } catch (IOException e) {
             System.out.println("VectorStore error on fetch: " + e.getMessage());
+            throw new RuntimeException(e);
         }
         return embedding;
     }
@@ -79,6 +82,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
             embedding = this.fetch(List.of(uuid), namespace);
         } catch (IOException e) {
             System.out.println("VectorStore error on fetch: " + e.getMessage());
+            throw new RuntimeException(e);
         }
         return embedding;
     }
@@ -95,6 +99,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
             this.post("/vectors/delete", requestBodyJson);
         } catch (IOException e) {
             System.out.println("VectorStore error on delete: " + e.getMessage());
+            throw new RuntimeException(e);
         }
 
     }
@@ -156,7 +161,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
                 .get()
                 .build();
 
-        try (Response response = new OkHttpClient().newCall(request).execute()) {
+        try (Response response = httpClient.newCall(request).execute()) {
             if (response.code() >= HTTP_BAD_REQUEST) {
                 throw new IOException(this.url);
             }
