@@ -22,7 +22,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
     private String namespace;
     // This attribute has no modifier to be package-private, so it can be mocked in tests.
     // This field will be accessible within this package, but not outside of it.
-    // In the future, we can see if MockWebServer from OkHttpClient works to simplify this:
+    // TODO: Check if MockWebServer from OkHttpClient can simplify this:
     // https://github.com/square/okhttp/blob/master/mockwebserver-junit5/README.md
     OkHttpClient httpClient = new OkHttpClient();
 
