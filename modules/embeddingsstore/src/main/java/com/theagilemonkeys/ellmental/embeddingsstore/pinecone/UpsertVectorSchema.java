@@ -18,7 +18,7 @@ public class UpsertVectorSchema {
 
     public UpsertVectorSchema(Embedding embedding, String namespace) {
         this.vectors = new ArrayList<>();
-        this.vectors.add(new Vector(embedding.id(), embedding.vector(), embedding.metadata()));
+        this.vectors.add(new Vector(embedding.id, embedding.vector, embedding.metadata));
         this.namespace = namespace;
     }
 

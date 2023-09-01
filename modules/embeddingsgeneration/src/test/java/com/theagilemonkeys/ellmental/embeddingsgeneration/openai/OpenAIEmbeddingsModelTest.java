@@ -39,25 +39,25 @@ public class OpenAIEmbeddingsModelTest {
         Embedding embedding = openAIEmbeddingsModel.generateEmbedding("The Agile Monkeys rule!");
 
         // The id is not null and is a valid UUID
-        assertNotNull(embedding.id());
-        assertDoesNotThrow(() -> UUID.fromString(embedding.id().toString()));
+        assertNotNull(embedding.id);
+        assertDoesNotThrow(() -> UUID.fromString(embedding.id.toString()));
 
         // The embedding is properly set
-        assertEquals(embedding.vector().size(), testValues.testGenerateEmbeddingExpectedValue.size());
-        assertArrayEquals(embedding.vector().toArray(), testValues.testGenerateEmbeddingExpectedValue.toArray());
+        assertEquals(embedding.vector.size(), testValues.testGenerateEmbeddingExpectedValue.size());
+        assertArrayEquals(embedding.vector.toArray(), testValues.testGenerateEmbeddingExpectedValue.toArray());
 
         // The original input is retrievable from the metadata
-        String input = embedding.metadata().get("input");
+        String input = embedding.metadata.get("input");
         assertEquals(input, "The Agile Monkeys rule!");
 
         // The source and model are set to the right parameters
-        String source = embedding.metadata().get("source");
+        String source = embedding.metadata.get("source");
         assertEquals(source, "OpenAI");
-        String model = embedding.metadata().get("model");
+        String model = embedding.metadata.get("model");
         assertEquals(model, OpenAIEmbeddingsModel.embeddingOpenAiModel);
 
         // createdAt is set and is a valid date
-        String createdAt = embedding.metadata().get("createdAt");
+        String createdAt = embedding.metadata.get("createdAt");
         assertNotNull(createdAt);
         assertDoesNotThrow(() -> java.time.LocalDateTime.parse(createdAt));
     }

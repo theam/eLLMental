@@ -17,11 +17,11 @@ public class Main {
         Embedding embedding = embeddingsSpaceComponent.save("Hello World!");
         System.out.printf("Saved embedding: %s", embedding);
 
-        System.out.printf("Got embedding: %s", embeddingsSpaceComponent.get(embedding.id()));
+        System.out.printf("Got embedding: %s", embeddingsSpaceComponent.get(embedding.id));
 
-        embeddingsSpaceComponent.delete(embedding.id());
+        embeddingsSpaceComponent.delete(embedding.id);
 
-        System.out.printf("Got embedding after delete: %s", embeddingsSpaceComponent.get(embedding.id()));
+        System.out.printf("Got embedding after delete: %s", embeddingsSpaceComponent.get(embedding.id));
     }
 }
 

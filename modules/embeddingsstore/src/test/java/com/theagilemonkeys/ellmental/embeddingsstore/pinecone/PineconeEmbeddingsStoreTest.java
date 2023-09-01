@@ -103,16 +103,16 @@ public class PineconeEmbeddingsStoreTest {
         assertEquals(2, embeddings.size());
 
         // Embeddings come in the right order and the UUIDs were parsed correctly
-        assertEquals(fakeUUID2, embeddings.get(0).id());
-        assertEquals(fakeUUID1, embeddings.get(1).id());
+        assertEquals(fakeUUID2, embeddings.get(0).id);
+        assertEquals(fakeUUID1, embeddings.get(1).id);
 
         // Embeddings values were parsed correctly
-        assertEquals(List.of(0.4, 0.5, 0.6), embeddings.get(0).vector());
-        assertEquals(List.of(0.1, 0.2, 0.3), embeddings.get(1).vector());
+        assertEquals(List.of(0.4, 0.5, 0.6), embeddings.get(0).vector);
+        assertEquals(List.of(0.1, 0.2, 0.3), embeddings.get(1).vector);
 
         // Embeddings metadata was parsed correctly
-        assertEquals(Map.of("key2", "value2"), embeddings.get(0).metadata());
-        assertEquals(Map.of("key1", "value1"), embeddings.get(1).metadata());
+        assertEquals(Map.of("key2", "value2"), embeddings.get(0).metadata);
+        assertEquals(Map.of("key1", "value1"), embeddings.get(1).metadata);
     }
 
     @Test
@@ -148,7 +148,7 @@ public class PineconeEmbeddingsStoreTest {
         Embedding embedding = pineconeEmbeddingsStore.get(uuid);
 
         assertNotNull(embedding);
-        assertEquals(vector.getValues(), embedding.vector());
+        assertEquals(vector.getValues(), embedding.vector);
     }
 
     @Test
