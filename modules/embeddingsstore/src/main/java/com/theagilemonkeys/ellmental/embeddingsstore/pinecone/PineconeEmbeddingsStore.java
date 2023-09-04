@@ -148,7 +148,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
 
         try (Response response = httpClient.newCall(request).execute()) {
             if (response.code() >= HTTP_BAD_REQUEST) {
-                throw new IOException(this.url);
+                throw new IOException(response.toString());
             }
 
             ResponseBody responseBody = response.body();
@@ -182,7 +182,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
 
         try (Response response = httpClient.newCall(request).execute()) {
             if (response.code() >= HTTP_BAD_REQUEST) {
-                throw new IOException(url);
+                throw new IOException(response.toString());
             }
 
             ResponseBody responseBody = response.body();

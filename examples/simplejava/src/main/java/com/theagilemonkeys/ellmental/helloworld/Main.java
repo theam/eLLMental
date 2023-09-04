@@ -1,25 +1,27 @@
 package com.theagilemonkeys.ellmental.helloworld;
 
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
+import com.theagilemonkeys.ellmental.embeddingsgeneration.EmbeddingsGenerationModel;
 import com.theagilemonkeys.ellmental.embeddingsgeneration.openai.OpenAIEmbeddingsModel;
+import com.theagilemonkeys.ellmental.embeddingsspace.EmbeddingsSpaceComponent;
 import com.theagilemonkeys.ellmental.embeddingsstore.EmbeddingsStore;
 import com.theagilemonkeys.ellmental.embeddingsstore.pinecone.PineconeEmbeddingsStore;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // Step 1: generate embeddings from input string
-        OpenAIEmbeddingsModel openAI = new OpenAIEmbeddingsModel("fakeAPIKey");
-        Embedding embedding =  openAI.generateEmbedding("Test");
+        EmbeddingsGenerationModel generationModel = new OpenAIEmbeddingsModel("api_key");
+        EmbeddingsStore embeddingsStore = new PineconeEmbeddingsStore("https://<index>.svc.<environment>.pinecone.io", "api_key");
+        EmbeddingsSpaceComponent embeddingsSpaceComponent = new EmbeddingsSpaceComponent(generationModel, embeddingsStore);
 
-        // Step 2: save the generated embeddings to a store (Pinecone in this case)
-        EmbeddingsStore embeddingStore = new PineconeEmbeddingsStore("fakeurl", "fakeAPIKey");
-        embeddingStore.store(embedding);
+        Embedding embedding = embeddingsSpaceComponent.save("que pasa mi hermanito");
+        System.out.printf("Saved embedding: %s", embedding);
 
-        // Step 3: search for the embedding in the store
-        List<Embedding> searchEmbeddings = embeddingStore.similaritySearch(embedding, 5);
+        System.out.printf("Got embedding: %s", embeddingsSpaceComponent.get(embedding.id()));
 
-        System.out.println("Embedding generation and storage finished.");
+        embeddingsSpaceComponent.delete(embedding.id());
+
+        System.out.printf("Got embedding after delete: %s", embeddingsSpaceComponent.get(embedding.id()));
     }
 }
 
