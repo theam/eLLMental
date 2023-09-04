@@ -14,7 +14,7 @@ public class Main {
         EmbeddingsStore embeddingsStore = new PineconeEmbeddingsStore("https://<index>.svc.<environment>.pinecone.io", "api_key");
         EmbeddingsSpaceComponent embeddingsSpaceComponent = new EmbeddingsSpaceComponent(generationModel, embeddingsStore);
 
-        Embedding embedding = embeddingsSpaceComponent.save("que pasa mi hermanito");
+        Embedding embedding = embeddingsSpaceComponent.save("Hello World!");
         System.out.printf("Saved embedding: %s", embedding);
 
         System.out.printf("Got embedding: %s", embeddingsSpaceComponent.get(embedding.id()));
