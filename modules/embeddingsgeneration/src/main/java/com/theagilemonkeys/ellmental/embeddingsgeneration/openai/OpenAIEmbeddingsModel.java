@@ -6,6 +6,7 @@ import com.theagilemonkeys.ellmental.embeddingsgeneration.EmbeddingsGenerationMo
 
 import com.theokanning.openai.embedding.EmbeddingRequest;
 import com.theokanning.openai.service.OpenAiService;
+import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.UUID;
 /**
  * OpenAI `EmbeddingsGenerationModel` implementation.
  */
+@RequiredArgsConstructor
 public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
     private final String openAIKey;
     public static String embeddingOpenAiModel = "text-embedding-ada-002";
@@ -22,15 +24,6 @@ public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
     // This attribute needs no modifier to allow injection from tests,
     // It is accessible for other classes in this package, but won't be accessible to end users.
     OpenAiService openAiService;
-
-    /**
-     * Constructor that initializes the OpenAI embeddings model with an explicit API Key.
-     *
-     * @param APIKey OpenAI API key.
-     */
-    public OpenAIEmbeddingsModel(String APIKey) {
-        openAIKey = APIKey;
-    }
 
     /**
      * Generates an embedding for the given input string.
