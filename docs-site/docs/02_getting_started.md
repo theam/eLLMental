@@ -13,15 +13,20 @@ In eLLMental, we make use of [JitPack](https://jitpack.io) to import eLLMental i
 
 Incorporate the eLLMental dependencies into your `build.gradle` file.
 
-```java
+```kotlin
 allprojects {
     repositories {
-        maven { url 'https://jitpack.io' }
+        maven {
+            url "https://jitpack.io"
+        }
     }
 }
 
 dependencies {
-    implementation 'com.github.theam:ellmental:main'
+    implementation "com.github.theam.ellmental:core:main-SNAPSHOT"
+    implementation "com.github.theam.ellmental:embeddingsgeneration:main-SNAPSHOT"
+    implementation "com.github.theam.ellmental:embeddingsstore:main-SNAPSHOT"
+    implementation "com.github.theam.ellmental:embeddingsspace:main-SNAPSHOT"
 }
 ```
 
@@ -29,19 +34,45 @@ dependencies {
 
 You can also add the eLLMental dependencies into your `pom.xml` file.
 
-```maven
-<repositories>
-    <repository>
-	    <id>jitpack.io</id>
-		<url>https://jitpack.io</url>
-	</repository>
-</repositories>
+```xml
+<project>
+    <!-- ... other configurations ... -->
 
-<dependency>
-	<groupId>com.github.theam</groupId>
-    <artifactId>eLLMental</artifactId>
-    <version>main</version>
-</dependency>
+    <!-- Add the JitPack repository to your project -->
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <!-- Add the eLLMental dependencies -->
+    <dependencies>
+        <dependency>
+            <groupId>com.github.theam.ellmental</groupId>
+            <artifactId>core</artifactId>
+            <version>main-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.theam.ellmental</groupId>
+            <artifactId>embeddingsgeneration</artifactId>
+            <version>main-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.theam.ellmental</groupId>
+            <artifactId>embeddingsstore</artifactId>
+            <version>main-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.theam.ellmental</groupId>
+            <artifactId>embeddingsspace</artifactId>
+            <version>main-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <!-- ... other configurations ... -->
+</project>
+
 ```
 
 
