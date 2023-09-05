@@ -5,5 +5,9 @@ include(
         "modules:embeddingsgeneration",
         "modules:embeddingsstore",
         "modules:embeddingsspace",
+        "modules:textgeneration",
         "examples:simplejava"
 )
+include 'modules:textgeneration'
+findProject(':modules:textgeneration')?.name = 'textgeneration'
+
