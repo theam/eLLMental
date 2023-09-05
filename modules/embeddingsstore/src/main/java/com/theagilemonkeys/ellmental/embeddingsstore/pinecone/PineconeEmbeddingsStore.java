@@ -10,6 +10,9 @@ import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import com.theagilemonkeys.ellmental.core.errors.MissingRequiredCredentialException;
 import lombok.RequiredArgsConstructor;
 import okhttp3.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 
 /**
@@ -17,6 +20,8 @@ import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
  */
 @RequiredArgsConstructor
 public class PineconeEmbeddingsStore extends EmbeddingsStore {
+    private static final Logger log = LoggerFactory.getLogger(PineconeEmbeddingsStore.class);
+
     private final String url;
     private final String apiKey;
     private String namespace;
@@ -48,9 +53,10 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
         String requestBodyJson = new Gson().toJson(schema);
 
         try {
+            log.debug("Inserting embedding with request: {}", requestBodyJson);
             this.post("/vectors/upsert", requestBodyJson);
         } catch (IOException e) {
-            System.out.println("VectorStore error on upsert: " + e.getMessage());
+            log.error("VectorStore error on upsert: {}", e.getMessage());
             throw new RuntimeException(e);
         }
 
@@ -63,11 +69,13 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
     public Embedding get(UUID uuid) {
         Embedding embedding = null;
         try {
+            log.debug("Getting embedding with UUID {} and namespace {}", uuid, this.namespace);
             embedding = this.fetch(List.of(uuid), null);
         } catch (IOException e) {
-            System.out.println("VectorStore error on fetch: " + e.getMessage());
+            log.error("VectorStore error on fetch: {}", e.getMessage());
             throw new RuntimeException(e);
         }
+        log.debug("Got embedding {}", embedding);
         return embedding;
     }
 
@@ -96,9 +104,10 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
         String requestBodyJson = new Gson().toJson(request);
 
         try {
+            log.debug("Deleting embedding with request: {}", requestBodyJson);
             this.post("/vectors/delete", requestBodyJson);
         } catch (IOException e) {
-            System.out.println("VectorStore error on delete: " + e.getMessage());
+            log.error("VectorStore error on delete: " + e.getMessage());
             throw new RuntimeException(e);
         }
 
@@ -114,9 +123,11 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
         String requestBodyJson = new Gson().toJson(body);
 
         try {
+            log.debug("Getting similar embeddings with request: {}", requestBodyJson);
             String responseString = this.post("/query", requestBodyJson);
             QueryVectorResponseSchema response = new Gson().fromJson(responseString, QueryVectorResponseSchema.class);
 
+            log.debug("Got the following embeddings as a response: {}", response);
             // Sort the matches by similarity using the score field and map them to Embedding objects
             return response
                     .matches
@@ -125,12 +136,13 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
                     .map(match -> new Embedding(match.id, match.values, match.metadata))
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            System.out.println("VectorStore error on upsert: " + e.getMessage());
+            log.error("VectorStore error on upsert: {}", e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
     private boolean validateEnvironment() {
+        log.debug("Validating environment variables");
         if (url == null) {
             throw new MissingRequiredCredentialException("A Pinecone URL must be set.");
         } else if (apiKey == null) {
