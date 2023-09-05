@@ -1,6 +1,6 @@
 package com.theagilemonkeys.webcrawler.config;
 
-import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,18 +8,28 @@ import java.nio.file.Paths;
 
 @Configuration
 public class AppConfiguration {
+
+    @Value("${OPEN_AI_API_KEY}")
+    private String openAiApiKey;
+
+    @Value("${PINECONE_API_KEY}")
+    private String pineconeApiKey;
+
+    @Value("${PINECONE_URL}")
+    private String pineconeUrl;
+
+    @Value("${PINECONE_NAMESPACE}")
+    private String pineconeNamespace;
+
     @Bean
     public EmbeddingsSpaceConfiguration embeddingsSpaceComponent() {
         String path = Paths.get("examples","webcrawler", ".env").toString();
-        Dotenv dotenv = Dotenv.configure()
-                .directory(path)
-                .filename(".env")
-                .load();
+
         return new EmbeddingsSpaceConfiguration(
-                 dotenv.get("OPEN_AI_API_KEY"),
-                dotenv.get("PINECONE_API_KEY"),
-                dotenv.get("PINECONE_URL"),
-                dotenv.get("PINECONE_NAMESPACE")
+                openAiApiKey,
+                pineconeApiKey,
+                pineconeUrl,
+                pineconeNamespace
         );
     }
 }
