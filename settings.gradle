@@ -5,5 +5,6 @@ include(
         "modules:embeddingsgeneration",
         "modules:embeddingsstore",
         "modules:embeddingsspace",
-        "examples:simplejava"
+        "examples:simplejava",
+        "examples:webcrawler"
 )
