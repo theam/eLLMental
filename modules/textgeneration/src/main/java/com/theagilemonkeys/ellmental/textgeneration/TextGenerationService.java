@@ -1,5 +1,7 @@
 package com.theagilemonkeys.ellmental.textgeneration;
 
-public abstract class TextGenerationService<Input, ProviderParameters> {
-    public abstract String generate(Input input, Double temperature, int maxTokens, ProviderParameters parameters);
+import java.util.List;
+
+public abstract class TextGenerationService<Input> {
+    public abstract String generate(List<Input> input);
 }
