@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.nio.file.Paths;
-
 @Configuration
 public class AppConfiguration {
 
@@ -23,8 +21,6 @@ public class AppConfiguration {
 
     @Bean
     public EmbeddingsSpaceConfiguration embeddingsSpaceComponent() {
-        String path = Paths.get("examples","webcrawler", ".env").toString();
-
         return new EmbeddingsSpaceConfiguration(
                 openAiApiKey,
                 pineconeApiKey,
