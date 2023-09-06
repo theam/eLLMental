@@ -70,7 +70,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
         Embedding embedding = null;
         try {
             log.debug("Getting embedding with UUID {} and namespace {}", uuid, this.namespace);
-            embedding = this.fetch(List.of(uuid), null);
+            embedding = this.fetch(List.of(uuid));
         } catch (IOException e) {
             log.error("VectorStore error on fetch: {}", e.getMessage());
             throw new RuntimeException(e);
