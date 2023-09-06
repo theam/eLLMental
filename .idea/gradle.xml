@@ -14,7 +14,9 @@
             <option value="$PROJECT_DIR$/examples/simplejava" />
             <option value="$PROJECT_DIR$/modules" />
             <option value="$PROJECT_DIR$/modules/embeddingsgeneration" />
+            <option value="$PROJECT_DIR$/modules/embeddingsspace" />
             <option value="$PROJECT_DIR$/modules/embeddingsstore" />
+            <option value="$PROJECT_DIR$/modules/textgeneration" />
           </set>
         </option>
       </GradleProjectSettings>
