@@ -103,7 +103,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
                 limit,
                 true,
                 true,
-                reference.vector(),
+                reference.vector,
                 this.namespace);
         String requestBodyJson = new Gson().toJson(body);
 
@@ -118,7 +118,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
                     .matches
                     .stream()
                     .sorted((a, b) -> Double.compare(b.score, a.score))
-                    .map(match -> new Embedding(match.id, match.values, match.metadata))
+                    .map(match -> new Embedding(match.id, match.values, match.metadata, match.score))
                     .collect(Collectors.toList());
         } catch (IOException e) {
             log.error("VectorStore error on upsert: {}", e.getMessage());
