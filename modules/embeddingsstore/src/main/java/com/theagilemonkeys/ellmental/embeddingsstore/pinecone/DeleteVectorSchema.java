@@ -9,7 +9,7 @@ import java.util.UUID;
 @Data
 public class DeleteVectorSchema {
     private final List<UUID> ids;
-    private boolean deleteAll;
     private String namespace;
+    private boolean deleteAll;
     private Map<String, String> filterMetadata;
 }

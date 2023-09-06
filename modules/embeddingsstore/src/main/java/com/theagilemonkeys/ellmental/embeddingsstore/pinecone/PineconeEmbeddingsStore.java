@@ -10,6 +10,9 @@ import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import com.theagilemonkeys.ellmental.core.errors.MissingRequiredCredentialException;
 import lombok.RequiredArgsConstructor;
 import okhttp3.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 
 /**
@@ -17,6 +20,8 @@ import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
  */
 @RequiredArgsConstructor
 public class PineconeEmbeddingsStore extends EmbeddingsStore {
+    private static final Logger log = LoggerFactory.getLogger(PineconeEmbeddingsStore.class);
+
     private final String url;
     private final String apiKey;
     private String namespace;
@@ -44,13 +49,14 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
      * @param embedding Embedding object to store.
      */
     public void store(Embedding embedding) {
-        UpsertVectorSchema schema = new UpsertVectorSchema(embedding);
+        UpsertVectorSchema schema = new UpsertVectorSchema(embedding, this.namespace);
         String requestBodyJson = new Gson().toJson(schema);
 
         try {
+            log.debug("Inserting embedding with request: {}", requestBodyJson);
             this.post("/vectors/upsert", requestBodyJson);
         } catch (IOException e) {
-            System.out.println("VectorStore error on upsert: " + e.getMessage());
+            log.error("VectorStore error on upsert: {}", e.getMessage());
             throw new RuntimeException(e);
         }
 
@@ -63,27 +69,13 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
     public Embedding get(UUID uuid) {
         Embedding embedding = null;
         try {
-            embedding = this.fetch(List.of(uuid), null);
+            log.debug("Getting embedding with UUID {} and namespace {}", uuid, this.namespace);
+            embedding = this.fetch(List.of(uuid));
         } catch (IOException e) {
-            System.out.println("VectorStore error on fetch: " + e.getMessage());
+            log.error("VectorStore error on fetch: {}", e.getMessage());
             throw new RuntimeException(e);
         }
-        return embedding;
-    }
-
-    /**
-     * Retrieves and embedding in the embeddings store based on its UUID.
-     * @param uuid UUID to retrieve.
-     * @param namespace String to look into.
-     */
-    public Embedding get(UUID uuid, String namespace) {
-        Embedding embedding = null;
-        try {
-            embedding = this.fetch(List.of(uuid), namespace);
-        } catch (IOException e) {
-            System.out.println("VectorStore error on fetch: " + e.getMessage());
-            throw new RuntimeException(e);
-        }
+        log.debug("Got embedding {}", embedding);
         return embedding;
     }
 
@@ -93,12 +85,14 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
      */
     public void delete(UUID uuid) {
         DeleteVectorSchema request = new DeleteVectorSchema(List.of(uuid));
+        request.setNamespace(this.namespace);
         String requestBodyJson = new Gson().toJson(request);
 
         try {
+            log.debug("Deleting embedding with request: {}", requestBodyJson);
             this.post("/vectors/delete", requestBodyJson);
         } catch (IOException e) {
-            System.out.println("VectorStore error on delete: " + e.getMessage());
+            log.error("VectorStore error on delete: " + e.getMessage());
             throw new RuntimeException(e);
         }
 
@@ -110,13 +104,15 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
                 true,
                 true,
                 reference.vector(),
-                namespace);
+                this.namespace);
         String requestBodyJson = new Gson().toJson(body);
 
         try {
+            log.debug("Getting similar embeddings with request: {}", requestBodyJson);
             String responseString = this.post("/query", requestBodyJson);
             QueryVectorResponseSchema response = new Gson().fromJson(responseString, QueryVectorResponseSchema.class);
 
+            log.debug("Got the following embeddings as a response: {}", response);
             // Sort the matches by similarity using the score field and map them to Embedding objects
             return response
                     .matches
@@ -125,12 +121,13 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
                     .map(match -> new Embedding(match.id, match.values, match.metadata))
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            System.out.println("VectorStore error on upsert: " + e.getMessage());
+            log.error("VectorStore error on upsert: {}", e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
     private boolean validateEnvironment() {
+        log.debug("Validating environment variables");
         if (url == null) {
             throw new MissingRequiredCredentialException("A Pinecone URL must be set.");
         } else if (apiKey == null) {
@@ -140,15 +137,15 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
         return true;
     }
 
-    private Embedding fetch(List<UUID> ids, String namespace) throws IOException {
+    private Embedding fetch(List<UUID> ids) throws IOException {
         if (!validateEnvironment()) {
             return null;
         }
 
         HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(this.url + "/vectors/fetch")).newBuilder();
         urlBuilder.addQueryParameter("ids", ids.toString());
-        if (namespace != null) {
-            urlBuilder.addQueryParameter("namespace", namespace);
+        if (this.namespace != null) {
+            urlBuilder.addQueryParameter("namespace", this.namespace);
         }
 
         HttpUrl url = urlBuilder.build();
@@ -163,7 +160,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
 
         try (Response response = httpClient.newCall(request).execute()) {
             if (response.code() >= HTTP_BAD_REQUEST) {
-                throw new IOException(this.url);
+                throw new IOException(response.toString());
             }
 
             ResponseBody responseBody = response.body();
@@ -197,7 +194,7 @@ public class PineconeEmbeddingsStore extends EmbeddingsStore {
 
         try (Response response = httpClient.newCall(request).execute()) {
             if (response.code() >= HTTP_BAD_REQUEST) {
-                throw new IOException(url);
+                throw new IOException(response.toString());
             }
 
             ResponseBody responseBody = response.body();

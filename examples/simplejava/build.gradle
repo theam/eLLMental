@@ -17,6 +17,7 @@ application {
 dependencies {
     implementation project(':modules:embeddingsgeneration')
     implementation project(':modules:embeddingsstore')
+    implementation project(':modules:embeddingsspace')
     implementation project(':core')
 
     testImplementation platform('org.junit:junit-bom:5.9.1')

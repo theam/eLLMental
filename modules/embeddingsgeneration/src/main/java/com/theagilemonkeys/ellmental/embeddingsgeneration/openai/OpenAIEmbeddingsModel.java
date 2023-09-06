@@ -7,6 +7,8 @@ import com.theagilemonkeys.ellmental.embeddingsgeneration.EmbeddingsGenerationMo
 import com.theokanning.openai.embedding.EmbeddingRequest;
 import com.theokanning.openai.service.OpenAiService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.UUID;
  */
 @RequiredArgsConstructor
 public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
+    private static final Logger log = LoggerFactory.getLogger(OpenAIEmbeddingsModel.class);
     private final String openAIKey;
     public static String embeddingOpenAiModel = "text-embedding-ada-002";
 
@@ -34,6 +37,8 @@ public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
     public Embedding generateEmbedding(String inputString) {
         /* TODO: the embeddings function from the library uses an array as input.
             We are only using a length 1 array. Should implement an array option? */
+        log.debug("Generating embedding for string {}", inputString);
+
         List<String> embeddingsInput = new ArrayList<>();
         embeddingsInput.add(inputString);
 
@@ -57,8 +62,10 @@ public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
     }
 
     private OpenAiService getService() {
+        log.debug("Creating openAI service");
         if (openAiService == null) {
             if (openAIKey == null) {
+                log.error("OpenAI API key is missing!");
                 throw new MissingRequiredCredentialException("OpenAI API key is required.");
             }
             openAiService = new OpenAiService(openAIKey);
