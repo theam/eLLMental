@@ -1,5 +1,6 @@
 package com.theagilemonkeys.ellmental.textgeneration.openai;
 
+import com.theagilemonkeys.ellmental.textgeneration.openai.errors.NoContentFoundException;
 import com.theokanning.openai.completion.chat.ChatCompletionChoice;
 import com.theokanning.openai.completion.chat.ChatCompletionRequest;
 import com.theokanning.openai.completion.chat.ChatCompletionResult;
@@ -8,14 +9,13 @@ import com.theokanning.openai.service.OpenAiService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static com.theagilemonkeys.ellmental.textgeneration.openai.errors.Constants.NO_CONTENT_FOUND_OPEN_AI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
@@ -60,9 +60,7 @@ public class OpenAiChatGenerationModelTest {
         emptyResult.setChoices(List.of(chatCompletionChoice));
         when(openAiService.createChatCompletion(getChatCompletion())).thenReturn(emptyResult);
 
-        String generatedText = openAiChatGenerationModel.generate(chatMessages);
-
-        assertEquals(generatedText, String.format(NO_CONTENT_FOUND_OPEN_AI, chatMessages));
+        assertThrows(NoContentFoundException.class, () -> openAiChatGenerationModel.generate(chatMessages));
 
         verifyNoMoreInteractions(openAiService);
     }

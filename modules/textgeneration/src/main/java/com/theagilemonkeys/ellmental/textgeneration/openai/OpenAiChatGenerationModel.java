@@ -1,6 +1,7 @@
 package com.theagilemonkeys.ellmental.textgeneration.openai;
 
 import com.theagilemonkeys.ellmental.textgeneration.TextGenerationService;
+import com.theagilemonkeys.ellmental.textgeneration.openai.errors.NoContentFoundException;
 import com.theokanning.openai.completion.chat.ChatCompletionChoice;
 import com.theokanning.openai.completion.chat.ChatCompletionRequest;
 import com.theokanning.openai.completion.chat.ChatMessage;
@@ -10,8 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.List;
-
-import static com.theagilemonkeys.ellmental.textgeneration.openai.errors.Constants.NO_CONTENT_FOUND_OPEN_AI;
 
 public class OpenAiChatGenerationModel extends TextGenerationService<ChatMessage> {
     private static final Double DEFAULT_TEMPERATURE = 0.7;
@@ -76,8 +75,10 @@ public class OpenAiChatGenerationModel extends TextGenerationService<ChatMessage
 
         log.debug("Chat completion response is {}", chatCompletionContent);
 
-        return !chatCompletionContent.isEmpty() ?
-                chatCompletionContent :
-                String.format(NO_CONTENT_FOUND_OPEN_AI, chatMessages);
+        if (chatCompletionContent.isEmpty()) {
+            throw new NoContentFoundException(chatMessages);
+        }
+
+        return chatCompletionContent;
     }
 }

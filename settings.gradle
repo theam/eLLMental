@@ -9,6 +9,3 @@ include(
         "examples:simplejava",
         "examples:webcrawler"
 )
-include 'modules:textgeneration'
-findProject(':modules:textgeneration')?.name = 'textgeneration'
-
