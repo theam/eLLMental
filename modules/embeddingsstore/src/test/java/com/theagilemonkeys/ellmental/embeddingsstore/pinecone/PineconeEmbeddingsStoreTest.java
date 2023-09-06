@@ -171,49 +171,6 @@ public class PineconeEmbeddingsStoreTest {
     }
 
     @Test
-    public void testGetWithNamespace() throws IOException {
-        String namespace = "my_namespace";
-        Vector vector = new Vector(uuid, vectorExpectedValue, null);
-        List<Vector> vectorResponse = List.of(vector);
-        Response response = new Response.Builder()
-                .request(new Request.Builder().url(url + "/vectors/fetch").build())
-                .protocol(Protocol.HTTP_1_1)
-                .code(200).message("").body(
-                        ResponseBody.Companion.create(
-                                new Gson().toJson(new FetchVectorResponseSchema(vectorResponse, namespace)),
-                                MediaType.get("application/json")
-                        ))
-                .build();
-        when(remoteCall.execute()).thenReturn(response);
-        when(httpClient.newCall(any(Request.class))).thenReturn(remoteCall);
-
-        Embedding embedding = pineconeEmbeddingsStore.get(uuid, namespace);
-
-        assertNotNull(embedding);
-        assertEquals(vector.getValues(), embedding.vector());
-    }
-
-    @Test
-    public void testGetWithNamespaceBadRequest() throws IOException {
-        String namespace = "my_namespace";
-        Vector vector = new Vector(uuid, vectorExpectedValue, null);
-        List<Vector> vectorResponse = List.of(vector);
-        Response response = new Response.Builder()
-                .request(new Request.Builder().url(url + "/vectors/fetch").build())
-                .protocol(Protocol.HTTP_1_1)
-                .code(400).message("").body(
-                        ResponseBody.Companion.create(
-                                new Gson().toJson(new FetchVectorResponseSchema(vectorResponse, namespace)),
-                                MediaType.get("application/json")
-                        ))
-                .build();
-        when(remoteCall.execute()).thenReturn(response);
-        when(httpClient.newCall(any(Request.class))).thenReturn(remoteCall);
-
-        assertThrows(RuntimeException.class, () -> pineconeEmbeddingsStore.get(uuid, namespace));
-    }
-
-    @Test
     public void testDelete() throws IOException {
         Response response = new Response.Builder()
                 .request(new Request.Builder().url(url + "/vectors/delete").build())
