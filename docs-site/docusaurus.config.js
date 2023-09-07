@@ -54,16 +54,16 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/logoellmental.png',
-      stylesheets: ['https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap'],
+      image: 'img/eLLMental-logo-black.svg',
+      stylesheets: [],
       fathomAnalytics: {
         siteId: 'HUKFMRPY',
       },
       navbar: {
         logo: {
           alt: 'eLLMental Logo',
-          src: '/img/eLLMental-logo-black.png',
-          srcDark: '/img/eLLMental-logo-white.png',
+          src: '/img/eLLMental-logo-black.svg',
+          srcDark: '/img/eLLMental-logo-white.svg',
         },
         items: [
           {

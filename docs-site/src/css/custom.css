@@ -40,6 +40,11 @@
   height: 1.5rem;
 }
 
+.navbar__logo img {
+  height: 150%;
+  margin-top: -5px;
+}
+
 .hiddenh1s > h1 {
   display: none;
 }
