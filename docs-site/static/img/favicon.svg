@@ -1,0 +1,25 @@
+<svg width="222" height="220" viewBox="0 0 222 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    path {
+      fill: black;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      path {
+        fill: white;
+      }
+    }
+  </style>
+  <g clip-path="url(#clip0_385_10)">
+    <path d="M130.403 90.8871H221.175C213.199 44.6098 176.756 8.09927 130.561 0.0793457H130.403V90.8871Z"
+      fill="black" />
+    <path d="M222 123.443H130.403V219.809H131.148C178.945 211.25 216.164 172.182 222.016 123.443H222Z" fill="black" />
+    <path d="M92.7551 0C40.1056 8.89338 0 54.7419 0 109.992C0 165.242 40.1056 211.107 92.7551 219.984V0Z"
+      fill="black" />
+  </g>
+  <defs>
+    <clipPath id="clip0_385_10">
+      <rect width="222" height="220" fill="white" />
+    </clipPath>
+  </defs>
+</svg>
