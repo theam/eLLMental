@@ -1,7 +1,7 @@
 # eLLMental
 
-![eLLMental](docs-site/static/img/eLLMental-logo-black.png#gh-light-mode-only)
-![eLLMental](docs-site/static/img/eLLMental-logo-white.png#gh-dark-mode-only)
+![eLLMental](docs-site/static/img/eLLMental-logo-black.svg#gh-light-mode-only)
+![eLLMental](docs-site/static/img/eLLMental-logo-white.svg#gh-dark-mode-only)
 
 eLLMental is the ultimate library of components for building LLM-driven projects in the JVM.
 
