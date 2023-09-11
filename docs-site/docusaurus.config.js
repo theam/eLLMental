@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'eLLMental',
-  favicon: 'img/favicon.png',
+  favicon: 'img/favicon.svg',
 
   // Set the production url of your site here
   url: 'https://docs.ellmental.com',
@@ -51,41 +51,39 @@ const config = {
   ],
   plugins: [require.resolve('docusaurus-plugin-fathom')],
   themeConfig:
-  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-      ({
-        // Replace with your project's social card
-        image: 'img/logoellmental.png',
-        stylesheets: [
-          "https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap",
-        ],
-        fathomAnalytics: {
-          siteId: 'HUKFMRPY',
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    ({
+      // Replace with your project's social card
+      image: 'img/eLLMental-logo-black.svg',
+      stylesheets: [],
+      fathomAnalytics: {
+        siteId: 'HUKFMRPY',
+      },
+      navbar: {
+        logo: {
+          alt: 'eLLMental Logo',
+          src: '/img/eLLMental-logo-black.svg',
+          srcDark: '/img/eLLMental-logo-white.svg',
         },
-        navbar: {
-          logo: {
-            alt: 'eLLMental Logo',
-            src: '/img/eLLMental-logo-black.png',
-            srcDark: '/img/eLLMental-logo-white.png'
+        items: [
+          {
+            href: 'https://github.com/theam/eLLMental',
+            label: 'GitHub',
+            position: 'right',
           },
-          items: [
-            {
-              href: 'https://github.com/theam/eLLMental',
-              label: 'GitHub',
-              position: 'right',
-            },
-            {
-              href: 'https://discord.gg/34cBbvjjAx',
-              label: 'Discord',
-              position: 'right',
-            },
-          ],
-        },
-        prism: {
-          theme: lightCodeTheme,
-          darkTheme: darkCodeTheme,
-          additionalLanguages: ['java'],
-        },
-      }),
+          {
+            href: 'https://discord.gg/ZajFQEjgFw',
+            label: 'Discord',
+            position: 'right',
+          },
+        ],
+      },
+      prism: {
+        theme: lightCodeTheme,
+        darkTheme: darkCodeTheme,
+        additionalLanguages: ['java'],
+      },
+    }),
 };
 
-module.exports = config
+module.exports = config;

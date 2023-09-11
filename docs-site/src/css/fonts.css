@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'Noi Grotesk';
+  src: url('/fonts/NoiGrotesk-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Noi Grotesk';
+  src: url('/fonts/NoiGrotesk-Semibold.ttf') format('truetype');
+  font-weight: bold;
+}
