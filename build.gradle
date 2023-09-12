@@ -1,16 +1,22 @@
 plugins {
-    id("java")
+    id "java"
+    id "io.freefair.lombok" version "8.3"
+    id 'maven-publish'
+    id 'signing'
 }
 
 def rootGroup = "com.theagilemonkeys.ellmental"
-def rootVersion = "1.0-SNAPSHOT"
+def rootVersion = properties['version']
+def rootSourceCompatibility = properties['sourceCompatibility']
 
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        mavenCentral()
+    }
 }
 
 java {
-    sourceCompatibility = '17'
+    sourceCompatibility = rootSourceCompatibility
 }
 
 dependencies {
@@ -18,15 +24,16 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
-subprojects {
+subprojects { subproject ->
     group = rootGroup
     version = rootVersion
 
-
     apply plugin: 'java'
+    apply plugin: 'io.freefair.lombok'
     apply plugin: 'maven-publish'
+    apply plugin: 'signing'
 
-    sourceCompatibility = '17'
+    sourceCompatibility = rootSourceCompatibility
 
     java {
         withSourcesJar()
@@ -37,17 +44,51 @@ subprojects {
         mavenCentral()
     }
 
-    dependencies{
-
+    test {
+        useJUnitPlatform()
     }
 
-    publishing {
-        publications {
-            maven(MavenPublication) {
-                groupId project.group
-                artifactId project.name
-                version project.version
-                from components.java
+    if (!subproject.name.startsWith('examples:')) {
+        publishing {
+            publications {
+                mavenJava(MavenPublication) {
+                    from components.java
+
+                    groupId = subproject.group
+                    artifactId = subproject.name
+                    version = subproject.version
+
+                    // Additional Pom information
+                    pom {
+                        name = subproject.name
+                        description = subproject.description
+                        // ... other POM properties
+                    }
+                }
+            }
+
+            repositories {
+                maven {
+                    name = 'OSSRH'
+                    url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+
+                    credentials {
+                        username project.findProperty("ossrhUsername") ?: ""
+                        password project.findProperty("ossrhPassword") ?: ""
+                    }
+                }
+            }
+        }
+
+        signing {
+            def privateKey = System.getenv('MAVEN_BASE64_PRIVATE_KEY')
+            def passphrase = System.getenv('MAVEN_KEY_PASSPHRASE')
+
+            if (privateKey && passphrase) {
+                useInMemoryPgpKeys(privateKey, passphrase)
+                sign publishing.publications
+            } else {
+                println "Private key or passphrase for signing not found. Skipping signing..."
             }
         }
     }

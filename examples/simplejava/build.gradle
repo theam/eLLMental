@@ -1,13 +1,5 @@
 plugins {
-    id 'java'
     id 'application'
-}
-
-group = 'com.theagilemonkeys.ellmental'
-version = '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
 }
 
 application {

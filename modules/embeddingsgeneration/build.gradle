@@ -1,17 +1,5 @@
-plugins {
-    id 'java'
-    id "io.freefair.lombok" version "8.3"
-    id 'maven-publish'
-    id 'signing'
-}
-
-group = "com.theagilemonkeys.ellmental"
-version = '1.0-SNAPSHOT'
-
-
-repositories {
-    mavenCentral()
-}
+// All the common configuration is set in the root build.gradle file
+description = 'Embeddings generation component of ELLMENTAL, the ultimate AI toolkit for Java'
 
 dependencies {
     implementation 'ch.qos.logback:logback-core:1.4.11'
@@ -24,44 +12,4 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.mockito:mockito-core:3.+'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.5.0'
-}
-
-test {
-    useJUnitPlatform()
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-
-            groupId = 'com.theagilemonkeys.ellmental'
-            artifactId = project.name
-            version = '0.0.1'
-
-            // Additional Pom information
-            pom {
-                name = project.name
-                description = 'Core package of ELLMENTAL, the ultimate AI toolkit for Java'
-                // ... other POM properties
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = 'OSSRH'
-            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-
-            credentials {
-                username project.findProperty("ossrhUsername") ?: ""
-                password project.findProperty("ossrhPassword") ?: ""
-            }
-        }
-    }
-}
-
-
-signing {
-    sign publishing.publications
 }

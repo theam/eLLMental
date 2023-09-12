@@ -1,14 +1,5 @@
-plugins {
-    id 'java'
-    id "io.freefair.lombok" version "8.3"
-}
-
-group = 'com.theagilemonkeys.ellemental'
-version = '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
+// All the common configuration is set in the root build.gradle file
+description = 'Text generation module of ELLMENTAL, the ultimate AI toolkit for Java'
 
 dependencies {
     implementation 'ch.qos.logback:logback-core:1.4.11'
