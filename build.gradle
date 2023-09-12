@@ -73,8 +73,8 @@ subprojects { subproject ->
                     url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
 
                     credentials {
-                        username project.findProperty("ossrhUsername") ?: ""
-                        password project.findProperty("ossrhPassword") ?: ""
+                        username = System.getenv("MAVEN_USERNAME")
+                        password = System.getenv("MAVEN_PASSWORD")
                     }
                 }
             }
