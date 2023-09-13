@@ -2,14 +2,16 @@ package com.theagilemonkeys.ellmental.embeddingsspace;
 
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import com.theagilemonkeys.ellmental.embeddingsgeneration.EmbeddingsGenerationModel;
-import com.theagilemonkeys.ellmental.embeddingsgeneration.openai.OpenAIEmbeddingsModel;
 import com.theagilemonkeys.ellmental.embeddingsstore.EmbeddingsStore;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 public class EmbeddingsSpaceComponent {
@@ -25,6 +27,17 @@ public class EmbeddingsSpaceComponent {
 
     public Embedding save(String text) {
         Embedding embedding = generate(text);
+        log.debug("Saving embedding {} to embedding store", embedding);
+        embeddingsStore.store(embedding);
+        return embedding;
+    }
+
+    public Embedding save(String text, Map<String, String> metadata) {
+        Embedding baseEmbedding = generate(text);
+        Map<String, String> embeddingMetadata = Stream
+                .concat(baseEmbedding.metadata.entrySet().stream(), metadata.entrySet().stream())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v2));
+        Embedding embedding = new Embedding(baseEmbedding.id, baseEmbedding.vector, embeddingMetadata, baseEmbedding.score);
         log.debug("Saving embedding {} to embedding store", embedding);
         embeddingsStore.store(embedding);
         return embedding;

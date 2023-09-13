@@ -8,7 +8,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,8 +28,10 @@ public class EmbeddingsSpaceComponentTest {
     private ArgumentCaptor<String> sampleTextCaptor;
 
     private final String sampleText = "sample text";
+    private final Map<String, String> sampleMetadata = Collections.singletonMap("key", "value");
     private final UUID embeddingId = UUID.randomUUID();
     private final Embedding embeddingMock = new Embedding(embeddingId, List.of(1.0, 2.0, 3.0), null);
+    private final Embedding embeddingWithMetadataMock = new Embedding(embeddingId, List.of(1.0, 2.0, 3.0), sampleMetadata);
 
     @Test
     public void testSaveEmbedding() {
@@ -40,6 +44,21 @@ public class EmbeddingsSpaceComponentTest {
         assertEquals(sampleText, capturedSampleText);
 
         verify(embeddingsStore).store(embeddingMock);
+
+        verifyNoMoreInteractions(embeddingsGenerationModel, embeddingsStore);
+    }
+
+    @Test
+    public void testSaveEmbeddingWithMetadata() {
+        when(embeddingsGenerationModel.generateEmbedding(sampleText)).thenReturn(embeddingMock);
+
+        embeddingsSpaceComponent.save(sampleText, sampleMetadata);
+
+        verify(embeddingsGenerationModel).generateEmbedding(sampleTextCaptor.capture());
+        String capturedSampleText = sampleTextCaptor.getValue();
+        assertEquals(sampleText, capturedSampleText);
+
+        verify(embeddingsStore).store(embeddingWithMetadataMock);
 
         verifyNoMoreInteractions(embeddingsGenerationModel, embeddingsStore);
     }
