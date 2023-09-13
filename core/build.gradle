@@ -1,16 +1,5 @@
-plugins {
-    id 'java'
-    id "io.freefair.lombok" version "8.3"
-}
-
-
-group = "com.theagilemonkeys.ellmental"
-version = '1.0-SNAPSHOT'
-
-
-repositories {
-    mavenCentral()
-}
+// All the common configuration is set in the root build.gradle file
+description = 'Core package of ELLMENTAL, the ultimate AI toolkit for Java'
 
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
