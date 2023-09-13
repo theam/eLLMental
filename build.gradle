@@ -3,11 +3,19 @@ plugins {
     id "io.freefair.lombok" version "8.3"
     id 'maven-publish'
     id 'signing'
+    id 'io.github.gradle-nexus.publish-plugin' version '1.3.0'
 }
 
 def rootGroup = "com.theagilemonkeys.ellmental"
 def rootVersion = properties['version']
 def rootSourceCompatibility = properties['sourceCompatibility']
+def publishablePackages = [
+    "core": "Core library for eLLMental",
+    "embeddingsgeneration": "Embeddings generation module for eLLMental",
+    "embeddingsstore": "Embeddings store module for eLLMental",
+    "embeddingsspace": "Embeddings space module for eLLMental",
+    "textgeneration": "Text generation module for eLLMental",
+]
 
 allprojects {
     repositories {
@@ -27,6 +35,7 @@ dependencies {
 subprojects { subproject ->
     group = rootGroup
     version = rootVersion
+    description = publishablePackages[subproject.name]
 
     apply plugin: 'java'
     apply plugin: 'io.freefair.lombok'
@@ -48,7 +57,7 @@ subprojects { subproject ->
         useJUnitPlatform()
     }
 
-    if (!subproject.name.startsWith('examples:')) {
+    if (publishablePackages.containsKey(subproject.name)) {
         publishing {
             publications {
                 mavenJava(MavenPublication) {
@@ -62,7 +71,25 @@ subprojects { subproject ->
                     pom {
                         name = subproject.name
                         description = subproject.description
-                        // ... other POM properties
+                        url = 'https://github.com/theam/ellmental'
+                        licenses {
+                            license {
+                                name = 'The Apache License, Version 2.0'
+                                url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            }
+                        }
+                        developers {
+                            developer {
+                                id = 'theam'
+                                name = 'The Agile Monkeys'
+                                email = 'info@theagilemonkeys.com'
+                            }
+                        }
+                        scm {
+                            connection = 'scm:git:git://github.com/theam/ellmental.git'
+                            developerConnection = 'scm:git:ssh://github.com:theam/ellmental.git'
+                            url = 'https://github.com/theam/ellmental'
+                        }
                     }
                 }
             }
@@ -96,4 +123,17 @@ subprojects { subproject ->
 
 tasks.test {
     useJUnitPlatform()
+}
+
+nexusPublishing {
+    packageGroup = rootGroup
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+
+            username = System.getenv("MAVEN_USERNAME")
+            password = System.getenv("MAVEN_PASSWORD")
+        }
+    }
 }

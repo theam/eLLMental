@@ -1,6 +1,4 @@
 // All the common configuration is set in the root build.gradle file
-description = 'Embeddings generation component of ELLMENTAL, the ultimate AI toolkit for Java'
-
 dependencies {
     implementation 'ch.qos.logback:logback-core:1.4.11'
     implementation 'org.slf4j:slf4j-api:2.0.9'

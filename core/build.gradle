@@ -1,6 +1,4 @@
 // All the common configuration is set in the root build.gradle file
-description = 'Core package of ELLMENTAL, the ultimate AI toolkit for Java'
-
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
