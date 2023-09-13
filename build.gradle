@@ -8,7 +8,7 @@ plugins {
 
 def rootGroup = "com.theagilemonkeys.ellmental"
 def rootVersion = properties['version']
-def rootSourceCompatibility = properties['sourceCompatibility']
+def rootSourceCompatibility = JavaVersion.VERSION_17
 def publishablePackages = [
     "core": "Core library for eLLMental",
     "embeddingsgeneration": "Embeddings generation module for eLLMental",
@@ -21,10 +21,16 @@ allprojects {
     repositories {
         mavenCentral()
     }
+
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = rootSourceCompatibility
+        targetCompatibility = rootSourceCompatibility
+    }
 }
 
 java {
     sourceCompatibility = rootSourceCompatibility
+    targetCompatibility = rootSourceCompatibility
 }
 
 dependencies {
