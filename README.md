@@ -23,17 +23,19 @@ The Embeddings Space Component provides straightforward interfaces to create and
 
 eLLMental provides composable abstractions for common patterns used in AI applications. For instance, to build a semantic search service with a REST API, using the OpenAI embeddings model and Pinecone as the database, this is what you have to do:
 
-The first thing you want to do is importing the eLLMental dependencies in your `build.gradle` file:
+You just need to add the eLLMental dependencies in your `build.gradle` file:
 
 ```gradle
-allprojects {
-    repositories {
-        maven { url 'https://jitpack.io' }
-    }
+repositories {
+    mavenCentral()
 }
 
 dependencies {
-    implementation 'com.github.theam:ellmental:main'
+    implementation "com.theagilemonkeys.ellmental:core:0.0.2"
+    implementation "com.theagilemonkeys.ellmental:embeddingsgeneration:0.0.2"
+    implementation "com.theagilemonkeys.ellmental:embeddingsstore:0.0.2"
+    implementation "com.theagilemonkeys.ellmental:embeddingsspace:0.0.2"
+    // Other dependencies...
 }
 ```
 
@@ -55,8 +57,6 @@ We'll need your help to build something that becomes really useful for everyone.
 2. Send us suggestions, questions, or feature requests by creating a [New Issue](https://github.com/theam/ellmental/issues/new).
 3. Look at the [Open Issues](https://github.com/theam/ellmental/issues), choose one that interests you, and start contributing.
 4. Spread the word about eLLMental!
-
-[//]: # (TODO Add a reference to the dethrone python website) 
 
 ## License
 

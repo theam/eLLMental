@@ -7,27 +7,26 @@ eLLMental is a library designed for building AI-powered applications written in 
 
 ## Step 1: Add the eLLMental dependencies
 
-In eLLMental, we make use of [JitPack](https://jitpack.io) to import eLLMental into our projects. Below there are some examples of how you can use it.
+You can import the eLLMental library from Maven Central. Below there are some examples of how you can do it.
 
 ### Gradle
 
 Incorporate the eLLMental dependencies into your `build.gradle` file.
 
-```kotlin
-allprojects {
-    repositories {
-        maven {
-            url "https://jitpack.io"
-        }
-    }
+```groovy
+//...
+repositories {
+    mavenCentral()
 }
 
 dependencies {
-    implementation "com.github.theam.ellmental:core:main-SNAPSHOT"
-    implementation "com.github.theam.ellmental:embeddingsgeneration:main-SNAPSHOT"
-    implementation "com.github.theam.ellmental:embeddingsstore:main-SNAPSHOT"
-    implementation "com.github.theam.ellmental:embeddingsspace:main-SNAPSHOT"
+    implementation "com.theagilemonkeys.ellmental:core:0.0.2"
+    implementation "com.theagilemonkeys.ellmental:embeddingsgeneration:0.0.2"
+    implementation "com.theagilemonkeys.ellmental:embeddingsstore:0.0.2"
+    implementation "com.theagilemonkeys.ellmental:embeddingsspace:0.0.2"
+    // Other dependencies
 }
+//...
 ```
 
 ### Maven
@@ -38,35 +37,27 @@ You can also add the eLLMental dependencies into your `pom.xml` file.
 <project>
     <!-- ... other configurations ... -->
 
-    <!-- Add the JitPack repository to your project -->
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-
     <!-- Add the eLLMental dependencies -->
     <dependencies>
         <dependency>
-            <groupId>com.github.theam.ellmental</groupId>
+            <groupId>com.theagilemonkeys.ellmental</groupId>
             <artifactId>core</artifactId>
-            <version>main-SNAPSHOT</version>
+            <version>0.0.2</version>
         </dependency>
         <dependency>
-            <groupId>com.github.theam.ellmental</groupId>
+            <groupId>com.theagilemonkeys.ellmental</groupId>
             <artifactId>embeddingsgeneration</artifactId>
-            <version>main-SNAPSHOT</version>
+            <version>0.0.2</version>
         </dependency>
         <dependency>
-            <groupId>com.github.theam.ellmental</groupId>
+            <groupId>com.theagilemonkeys.ellmental</groupId>
             <artifactId>embeddingsstore</artifactId>
-            <version>main-SNAPSHOT</version>
+            <version>0.0.2</version>
         </dependency>
         <dependency>
-            <groupId>com.github.theam.ellmental</groupId>
+            <groupId>com.theagilemonkeys.ellmental</groupId>
             <artifactId>embeddingsspace</artifactId>
-            <version>main-SNAPSHOT</version>
+            <version>0.0.2</version>
         </dependency>
     </dependencies>
 
@@ -74,8 +65,6 @@ You can also add the eLLMental dependencies into your `pom.xml` file.
 </project>
 
 ```
-
-
 
 ## Step 2: Initializing the EmbeddingsSpaceComponent
 
