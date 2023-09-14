@@ -227,52 +227,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_runner_work_eLLMental_eLLMental_docs_site_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7462);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7294);
 /* harmony import */ var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3905);
-/* @jsxRuntime classic */ /* @jsx mdx */ /* @jsxFrag React.Fragment */const frontMatter={slug:'/getting-started'};const contentTitle='Getting started';const metadata={"unversionedId":"getting_started","id":"getting_started","title":"Getting started","description":"eLLMental is a library designed for building AI-powered applications written in Java, and it offers production-ready components that can be used right away in your current JVM projects. In this guide, we will showcase how to use the EmbeddingsSpaceComponent to find relevant text based on a query.","source":"@site/docs/02_getting_started.md","sourceDirName":".","slug":"/getting-started","permalink":"/getting-started","draft":false,"tags":[],"version":"current","lastUpdatedBy":"Javier Toledo","lastUpdatedAt":1694700794,"formattedLastUpdatedAt":"Sep 14, 2023","sidebarPosition":2,"frontMatter":{"slug":"/getting-started"},"sidebar":"docs","previous":{"title":"Introduction","permalink":"/"},"next":{"title":"Core Abstractions","permalink":"/components/core_abstractions"}};const assets={};const toc=[{value:'Step 1: Add the eLLMental dependencies',id:'step-1-add-the-ellmental-dependencies',level:2},{value:'Gradle',id:'gradle',level:3},{value:'Maven',id:'maven',level:3},{value:'Step 2: Initializing the EmbeddingsSpaceComponent',id:'step-2-initializing-the-embeddingsspacecomponent',level:2},{value:'Step 3: Running the example',id:'step-3-running-the-example',level:2},{value:'eLLMental ❤️ Springboot',id:'ellmental-️-springboot',level:2},{value:'Importing env variables from application.properties',id:'importing-env-variables-from-applicationproperties',level:3},{value:'Configuring EmbeddingsSpaceComponent',id:'configuring-embeddingsspacecomponent',level:3},{value:'Autowiring EmbeddingsSpaceComponent',id:'autowiring-embeddingsspacecomponent',level:3},{value:'Next steps',id:'next-steps',level:2}];const layoutProps={toc};const MDXLayout="wrapper";function MDXContent(_ref){let{components,...props}=_ref;return (0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)(MDXLayout,(0,_home_runner_work_eLLMental_eLLMental_docs_site_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({},layoutProps,props,{components:components,mdxType:"MDXLayout"}),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("h1",{"id":"getting-started"},`Getting started`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("p",null,`eLLMental is a library designed for building AI-powered applications written in Java, and it offers production-ready components that can be used right away in your current JVM projects. In this guide, we will showcase how to use the `,(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("inlineCode",{parentName:"p"},`EmbeddingsSpaceComponent`),` to find relevant text based on a query.`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("h2",{"id":"step-1-add-the-ellmental-dependencies"},`Step 1: Add the eLLMental dependencies`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("p",null,`In eLLMental, we make use of `,(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("a",{parentName:"p","href":"https://jitpack.io"},`JitPack`),` to import eLLMental into our projects. Below there are some examples of how you can use it.`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("h3",{"id":"gradle"},`Gradle`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("p",null,`Incorporate the eLLMental dependencies into your `,(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("inlineCode",{parentName:"p"},`build.gradle`),` file.`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("pre",null,(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("code",{parentName:"pre","className":"language-kotlin"},`allprojects {
-    repositories {
-        maven {
-            url "https://jitpack.io"
-        }
-    }
+/* @jsxRuntime classic */ /* @jsx mdx */ /* @jsxFrag React.Fragment */const frontMatter={slug:'/getting-started'};const contentTitle='Getting started';const metadata={"unversionedId":"getting_started","id":"getting_started","title":"Getting started","description":"eLLMental is a library designed for building AI-powered applications written in Java, and it offers production-ready components that can be used right away in your current JVM projects. In this guide, we will showcase how to use the EmbeddingsSpaceComponent to find relevant text based on a query.","source":"@site/docs/02_getting_started.md","sourceDirName":".","slug":"/getting-started","permalink":"/getting-started","draft":false,"tags":[],"version":"current","lastUpdatedBy":"Javier Toledo","lastUpdatedAt":1694702479,"formattedLastUpdatedAt":"Sep 14, 2023","sidebarPosition":2,"frontMatter":{"slug":"/getting-started"},"sidebar":"docs","previous":{"title":"Introduction","permalink":"/"},"next":{"title":"Core Abstractions","permalink":"/components/core_abstractions"}};const assets={};const toc=[{value:'Step 1: Add the eLLMental dependencies',id:'step-1-add-the-ellmental-dependencies',level:2},{value:'Gradle',id:'gradle',level:3},{value:'Maven',id:'maven',level:3},{value:'Step 2: Initializing the EmbeddingsSpaceComponent',id:'step-2-initializing-the-embeddingsspacecomponent',level:2},{value:'Step 3: Running the example',id:'step-3-running-the-example',level:2},{value:'eLLMental ❤️ Springboot',id:'ellmental-️-springboot',level:2},{value:'Importing env variables from application.properties',id:'importing-env-variables-from-applicationproperties',level:3},{value:'Configuring EmbeddingsSpaceComponent',id:'configuring-embeddingsspacecomponent',level:3},{value:'Autowiring EmbeddingsSpaceComponent',id:'autowiring-embeddingsspacecomponent',level:3},{value:'Next steps',id:'next-steps',level:2}];const layoutProps={toc};const MDXLayout="wrapper";function MDXContent(_ref){let{components,...props}=_ref;return (0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)(MDXLayout,(0,_home_runner_work_eLLMental_eLLMental_docs_site_node_modules_babel_runtime_helpers_esm_extends_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)({},layoutProps,props,{components:components,mdxType:"MDXLayout"}),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("h1",{"id":"getting-started"},`Getting started`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("p",null,`eLLMental is a library designed for building AI-powered applications written in Java, and it offers production-ready components that can be used right away in your current JVM projects. In this guide, we will showcase how to use the `,(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("inlineCode",{parentName:"p"},`EmbeddingsSpaceComponent`),` to find relevant text based on a query.`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("h2",{"id":"step-1-add-the-ellmental-dependencies"},`Step 1: Add the eLLMental dependencies`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("p",null,`You can import the eLLMental library from Maven Central. Below there are some examples of how you can do it.`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("h3",{"id":"gradle"},`Gradle`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("p",null,`Incorporate the eLLMental dependencies into your `,(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("inlineCode",{parentName:"p"},`build.gradle`),` file.`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("pre",null,(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("code",{parentName:"pre","className":"language-groovy"},`//...
+repositories {
+    mavenCentral()
 }
 
 dependencies {
-    implementation "com.github.theam.ellmental:core:main-SNAPSHOT"
-    implementation "com.github.theam.ellmental:embeddingsgeneration:main-SNAPSHOT"
-    implementation "com.github.theam.ellmental:embeddingsstore:main-SNAPSHOT"
-    implementation "com.github.theam.ellmental:embeddingsspace:main-SNAPSHOT"
+    implementation "com.theagilemonkeys.ellmental:core:0.0.2"
+    implementation "com.theagilemonkeys.ellmental:embeddingsgeneration:0.0.2"
+    implementation "com.theagilemonkeys.ellmental:embeddingsstore:0.0.2"
+    implementation "com.theagilemonkeys.ellmental:embeddingsspace:0.0.2"
+    // Other dependencies
 }
+//...
 `)),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("h3",{"id":"maven"},`Maven`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("p",null,`You can also add the eLLMental dependencies into your `,(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("inlineCode",{parentName:"p"},`pom.xml`),` file.`),(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("pre",null,(0,_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__/* .mdx */ .kt)("code",{parentName:"pre","className":"language-xml"},`<project>
     <!-- ... other configurations ... -->
-
-    <!-- Add the JitPack repository to your project -->
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
 
     <!-- Add the eLLMental dependencies -->
     <dependencies>
         <dependency>
-            <groupId>com.github.theam.ellmental</groupId>
+            <groupId>com.theagilemonkeys.ellmental</groupId>
             <artifactId>core</artifactId>
-            <version>main-SNAPSHOT</version>
+            <version>0.0.2</version>
         </dependency>
         <dependency>
-            <groupId>com.github.theam.ellmental</groupId>
+            <groupId>com.theagilemonkeys.ellmental</groupId>
             <artifactId>embeddingsgeneration</artifactId>
-            <version>main-SNAPSHOT</version>
+            <version>0.0.2</version>
         </dependency>
         <dependency>
-            <groupId>com.github.theam.ellmental</groupId>
+            <groupId>com.theagilemonkeys.ellmental</groupId>
             <artifactId>embeddingsstore</artifactId>
-            <version>main-SNAPSHOT</version>
+            <version>0.0.2</version>
         </dependency>
         <dependency>
-            <groupId>com.github.theam.ellmental</groupId>
+            <groupId>com.theagilemonkeys.ellmental</groupId>
             <artifactId>embeddingsspace</artifactId>
-            <version>main-SNAPSHOT</version>
+            <version>0.0.2</version>
         </dependency>
     </dependencies>
 
