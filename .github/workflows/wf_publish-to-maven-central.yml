@@ -17,10 +17,10 @@ jobs:
           distribution: 'temurin'
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@01ad6d2663fa6fc4add68e686ff72c415a2cf3c3
-      - name: Publish package
+      - name: Publish to Sonatype and Release to Maven Central
         uses: gradle/gradle-build-action@3bfe3a46584a206fb8361cdedd0647b0c4204232
         with:
-          arguments: publish -Pversion=${{ github.event.release.tag_name }}
+          arguments: publishToSonatype closeAndReleaseSonatypeStagingRepository -Pversion=${{ github.event.release.tag_name }}
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
