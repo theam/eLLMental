@@ -10,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * OpenAI `EmbeddingsGenerationModel` implementation.
@@ -53,7 +50,7 @@ public class OpenAIEmbeddingsModel extends EmbeddingsGenerationModel {
                 .get(0)
                 .getEmbedding();
 
-        Map<String, String> metadata = new java.util.HashMap<>();
+        Map<String, String> metadata = new HashMap<>();
         metadata.put("input", inputString);
         metadata.put("source", "OpenAI");
         metadata.put("model", embeddingOpenAiModel);

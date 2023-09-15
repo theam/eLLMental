@@ -2,14 +2,17 @@ package com.theagilemonkeys.ellmental.embeddingsspace;
 
 import com.theagilemonkeys.ellmental.core.schema.Embedding;
 import com.theagilemonkeys.ellmental.embeddingsgeneration.EmbeddingsGenerationModel;
-import com.theagilemonkeys.ellmental.embeddingsgeneration.openai.OpenAIEmbeddingsModel;
 import com.theagilemonkeys.ellmental.embeddingsstore.EmbeddingsStore;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+
+import static com.theagilemonkeys.ellmental.embeddingsspace.Utils.getChecksum;
 
 @RequiredArgsConstructor
 public class EmbeddingsSpaceComponent {
@@ -23,11 +26,29 @@ public class EmbeddingsSpaceComponent {
         return embeddingsGenerationModel.generateEmbedding(text);
     }
 
-    public Embedding save(String text) {
+    public Embedding save(String text) throws NoSuchAlgorithmException {
         Embedding embedding = generate(text);
+        String checksum = getChecksum(text);
+        embedding.metadata.put("checksum", checksum);
         log.debug("Saving embedding {} to embedding store", embedding);
         embeddingsStore.store(embedding);
         return embedding;
+    }
+
+    public Embedding save(String text, Map<String, String> metadata) throws NoSuchAlgorithmException {
+        Embedding embedding = generate(text);
+        String checksum = getChecksum(text);
+        // Note: In case of metadata collision, putAll will keep the newest value (the one from the function parameter)
+        embedding.metadata.putAll(metadata);
+        embedding.metadata.put("checksum", checksum);
+        // TODO: Query if a record with the same checksum exists
+        log.debug("Saving embedding {} to embedding store", embedding);
+        embeddingsStore.store(embedding);
+        return embedding;
+    }
+
+    public boolean doesEmbeddingExist(Embedding embedding) {
+
     }
 
     public List<Embedding> mostSimilarEmbeddings(Embedding referenceEmbedding, int limit) {
